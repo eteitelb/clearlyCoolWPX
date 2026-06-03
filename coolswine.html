@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>CoolSwine Heat Stress Tool — Clearly Cool</title>
+  <meta name="description" content="CoolSwine: proprietary online tool for modeling pig heat stress with and without radiant cooling. Built on swine thermal physiology research." />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --navy:    #0d1f3c;
+      --blue:    #1a7ab5;
+      --blue-lt: #3aaee0;
+      --ice:     #e8f5fc;
+      --text:    #1a1a2e;
+      --muted:   #556;
+      --white:   #ffffff;
+      --amber:   #f0a500;
+      --max:     1100px;
+    }
+    body { font-family: 'Segoe UI', system-ui, sans-serif; color: var(--text); line-height: 1.6; }
+
+    /* ── NAV ── */
+    nav {
+      position: sticky; top: 0; z-index: 100;
+      background: var(--white);
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0 2rem; height: 80px;
+      box-shadow: 0 2px 8px rgba(0,0,0,.08);
+    }
+    .nav-logo img { height: 62px; display: block; }
+    .nav-links { display: flex; gap: 1.8rem; list-style: none; align-items: center; }
+    .nav-links a { color: var(--navy); text-decoration: none; font-size: .95rem; font-weight: 500; transition: color .2s; }
+    .nav-links a:hover, .nav-links a.active { color: var(--blue); }
+    .nav-cta { background: var(--amber); color: var(--white); padding: .5rem 1.3rem; border-radius: 5px; font-weight: 700; font-size: .9rem; text-decoration: none; transition: background .2s; }
+    .nav-cta:hover { background: #d4920a; }
+    @media (max-width: 700px) { .nav-links { gap: .9rem; } .nav-links li.hide-sm { display: none; } }
+
+    /* ── HERO ── */
+    .hero {
+      background: linear-gradient(135deg, var(--navy) 0%, #0f3a6a 50%, #1a5a90 100%);
+      color: var(--white); text-align: center;
+      padding: 5.5rem 1.5rem 4.5rem;
+    }
+    .hero-badge {
+      display: inline-flex; align-items: center; gap: .5rem;
+      background: rgba(58,174,224,.2); border: 1px solid rgba(58,174,224,.4);
+      color: #7fd4f5; font-size: .78rem; font-weight: 700;
+      letter-spacing: .1em; text-transform: uppercase;
+      padding: .35rem 1rem; border-radius: 20px; margin-bottom: 1.5rem;
+    }
+    .hero h1 { font-size: clamp(2.2rem, 5vw, 3.5rem); font-weight: 800; margin-bottom: .75rem; }
+    .hero h1 span { color: #7fd4f5; }
+    .hero p { font-size: 1.15rem; opacity: .85; max-width: 600px; margin: 0 auto 2.5rem; }
+    .hero-cta {
+      display: inline-flex; align-items: center; gap: .6rem;
+      background: var(--amber); color: var(--white);
+      padding: 1rem 2.2rem; border-radius: 6px;
+      font-weight: 800; font-size: 1.05rem; text-decoration: none;
+      transition: background .2s; box-shadow: 0 4px 16px rgba(240,165,0,.35);
+    }
+    .hero-cta:hover { background: #d4920a; }
+    .hero-cta-icon { font-size: 1.2rem; }
+    .hero-sub { display: block; margin-top: 1.2rem; font-size: .85rem; opacity: .6; }
+
+    /* ── SECTIONS ── */
+    section { padding: 5rem 1.5rem; }
+    .container { max-width: var(--max); margin: 0 auto; }
+    .section-label { text-transform: uppercase; letter-spacing: .12em; font-size: .75rem; color: var(--blue-lt); font-weight: 700; margin-bottom: .5rem; }
+    h2 { font-size: clamp(1.6rem, 3vw, 2.2rem); font-weight: 800; color: var(--navy); margin-bottom: .75rem; }
+
+    /* ── WHAT IT DOES ── */
+    .what-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 1.5rem; margin-top: 2.5rem; }
+    .what-card {
+      background: var(--white); border-radius: 10px; padding: 1.6rem;
+      border-top: 4px solid var(--blue-lt);
+      box-shadow: 0 2px 12px rgba(0,0,0,.06);
+    }
+    .what-card .icon { font-size: 2rem; margin-bottom: .75rem; }
+    .what-card h3 { font-size: 1rem; color: var(--navy); margin-bottom: .4rem; }
+    .what-card p { font-size: .88rem; color: var(--muted); }
+
+    /* ── SCREENSHOTS ── */
+    .screenshots-bg { background: var(--ice); }
+    .screenshots-intro { max-width: 680px; margin-bottom: 3rem; }
+    .screenshots-intro p { color: var(--muted); margin-top: .5rem; }
+
+    .compare-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; }
+    @media (max-width: 700px) { .compare-grid { grid-template-columns: 1fr; } }
+
+    .compare-card { background: var(--white); border-radius: 12px; overflow: hidden; box-shadow: 0 4px 20px rgba(0,0,0,.08); }
+    .compare-label {
+      display: flex; align-items: center; gap: .6rem;
+      padding: .9rem 1.4rem; font-weight: 700; font-size: .9rem;
+    }
+    .compare-label.without { background: #fff3e0; color: #b45309; }
+    .compare-label.with    { background: #e0f2fe; color: #0369a1; }
+    .compare-label .dot { width: 10px; height: 10px; border-radius: 50%; flex-shrink: 0; }
+    .compare-label.without .dot { background: #f59e0b; }
+    .compare-label.with    .dot { background: #0ea5e9; }
+
+    .compare-img-wrap { position: relative; }
+    .compare-img-wrap img { width: 100%; display: block; }
+    /* Placeholder shown when photo not yet added */
+    .compare-placeholder {
+      width: 100%; aspect-ratio: 16/10;
+      background: linear-gradient(135deg, #dbeafe 0%, #bfdbfe 100%);
+      display: flex; flex-direction: column; align-items: center; justify-content: center;
+      gap: .5rem; color: var(--blue); padding: 2rem;
+    }
+    .compare-placeholder.warm {
+      background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%);
+      color: #92400e;
+    }
+    .compare-placeholder .ph-icon { font-size: 3rem; opacity: .4; }
+    .compare-placeholder p { font-size: .82rem; opacity: .6; font-style: italic; text-align: center; }
+    .compare-caption { padding: 1.2rem 1.4rem; }
+    .compare-caption h3 { font-size: .97rem; color: var(--navy); margin-bottom: .3rem; }
+    .compare-caption p { font-size: .85rem; color: var(--muted); }
+
+    /* ── SCIENCE ── */
+    .science-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; align-items: center; }
+    @media (max-width: 720px) { .science-grid { grid-template-columns: 1fr; } }
+    .science-list { list-style: none; margin-top: 1.2rem; }
+    .science-list li { display: flex; gap: .75rem; align-items: flex-start; margin-bottom: .75rem; font-size: .93rem; color: var(--muted); }
+    .science-list li::before { content: '✓'; color: var(--blue-lt); font-weight: 700; flex-shrink: 0; }
+    .science-quote {
+      background: var(--ice); border-left: 4px solid var(--blue-lt);
+      padding: 1.5rem 1.8rem; border-radius: 0 8px 8px 0;
+      font-size: 1.02rem; color: var(--navy); font-style: italic; line-height: 1.7;
+    }
+    .science-quote cite { display: block; margin-top: .75rem; font-size: .82rem; color: var(--muted); font-style: normal; }
+
+    /* ── CTA ── */
+    .cta-section {
+      background: var(--navy); color: var(--white);
+      text-align: center; padding: 5.5rem 1.5rem;
+    }
+    .cta-section h2 { color: var(--white); font-size: clamp(1.6rem, 3vw, 2.4rem); margin-bottom: 1rem; }
+    .cta-section p { opacity: .8; max-width: 540px; margin: 0 auto 2.5rem; font-size: 1.05rem; }
+    .cta-big {
+      display: inline-flex; align-items: center; gap: .7rem;
+      background: var(--amber); color: var(--white);
+      padding: 1.1rem 2.6rem; border-radius: 6px;
+      font-weight: 800; font-size: 1.15rem; text-decoration: none;
+      transition: background .2s; box-shadow: 0 4px 20px rgba(240,165,0,.4);
+    }
+    .cta-big:hover { background: #d4920a; }
+    .cta-url { display: block; margin-top: 1rem; font-size: .85rem; opacity: .5; letter-spacing: .04em; }
+
+    /* ── FOOTER ── */
+    footer { background: #07111f; color: rgba(255,255,255,.45); text-align: center; padding: 1.4rem; font-size: .83rem; }
+    footer a { color: rgba(255,255,255,.55); text-decoration: none; }
+    footer a:hover { color: var(--white); }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a class="nav-logo" href="index.html">
+    <img src="photos/logo.png" alt="Clearly-cool.com" />
+  </a>
+  <ul class="nav-links">
+    <li class="hide-sm"><a href="index.html#how-it-works">How It Works</a></li>
+    <li class="hide-sm"><a href="index.html#product">Product</a></li>
+    <li class="hide-sm"><a href="index.html#team">About</a></li>
+    <li class="hide-sm"><a href="index.html#partnerships">Partnerships</a></li>
+    <li><a href="applications.html">Applications</a></li>
+    <li><a href="coolswine.html" class="active">CoolSwine Tool</a></li>
+  </ul>
+  <a class="nav-cta" href="mailto:hello@clearly-cool.com?subject=CoolSwine Inquiry">Contact Us</a>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-badge">🐖 Proprietary Swine Thermal Physiology Tool</div>
+  <h1><span>CoolSwine</span> Heat Stress Tool</h1>
+  <p>Model the thermal load on your pigs — with and without radiant cooling — using our proprietary heat stress physiology calculator built on peer-reviewed swine research.</p>
+  <a class="hero-cta" href="https://tinyurl.com/coolswine" target="_blank" rel="noopener">
+    <span class="hero-cta-icon">🌡️</span> Launch CoolSwine Tool
+  </a>
+  <span class="hero-sub">Opens at tinyurl.com/coolswine</span>
+</div>
+
+<!-- WHAT IT DOES -->
+<section>
+  <div class="container">
+    <div class="section-label">About the Tool</div>
+    <h2>What CoolSwine Models</h2>
+    <p style="color:var(--muted); max-width:660px; margin-top:.5rem">CoolSwine translates barn conditions into actual thermal load on the animal — then shows you exactly how much radiant cooling changes the outcome. Built on swine-specific thermal physiology, not generic animal models.</p>
+    <div class="what-grid">
+      <div class="what-card">
+        <div class="icon">🌡️</div>
+        <h3>Thermal Load Modeling</h3>
+        <p>Input air temperature, humidity, and radiant conditions. The tool calculates the effective heat stress experienced by the pig — not just ambient temperature.</p>
+      </div>
+      <div class="what-card">
+        <div class="icon">📉</div>
+        <h3>Radiant Cooling Impact</h3>
+        <p>See side-by-side how adding a Clearly Cool panel over each sow reduces thermal load — modeled from real swine physiology data and pilot measurements.</p>
+      </div>
+      <div class="what-card">
+        <div class="icon">🔬</div>
+        <h3>Swine-Specific Physiology</h3>
+        <p>Pigs thermoregulate differently than humans or other livestock. CoolSwine uses species-specific parameters derived from published swine research.</p>
+      </div>
+      <div class="what-card">
+        <div class="icon">⚡</div>
+        <h3>Instant, Free to Use</h3>
+        <p>No download or login required. Run scenarios for your barn conditions in seconds and share results with your team or veterinarian.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SCREENSHOTS -->
+<section class="screenshots-bg">
+  <div class="container">
+    <div class="screenshots-intro">
+      <div class="section-label">Tool Preview</div>
+      <h2>Before &amp; After Radiant Cooling</h2>
+      <p>The tool visualizes thermal comfort zones for sows under typical barn conditions — then recalculates with a Clearly Cool panel overhead. The difference is immediate and quantified.</p>
+    </div>
+
+    <div class="compare-grid">
+
+      <!-- WITHOUT panel -->
+      <div class="compare-card">
+        <div class="compare-label without">
+          <div class="dot"></div>
+          Without Radiant Cooling
+        </div>
+        <div class="compare-img-wrap" style="position:relative;">
+          <div class="compare-placeholder warm" id="ph-without">
+            <div class="ph-icon">🌡️</div>
+            <p>Add photos/coolswine-without.jpg</p>
+          </div>
+          <img src="photos/coolswine-without.jpg"
+               alt="CoolSwine tool — without radiant cooling"
+               style="display:none; width:100%; position:absolute; top:0; left:0;"
+               onload="this.style.cssText='display:block;width:100%;'; document.getElementById('ph-without').style.display='none';" />
+        </div>
+        <div class="compare-caption">
+          <h3>Elevated Heat Stress</h3>
+          <p>Under typical summer barn conditions, sows exceed safe thermal comfort thresholds — reducing feed intake, reproductive performance, and litter outcomes.</p>
+        </div>
+      </div>
+
+      <!-- WITH panel -->
+      <div class="compare-card">
+        <div class="compare-label with">
+          <div class="dot"></div>
+          With Clearly Cool Radiant Panel
+        </div>
+        <div class="compare-img-wrap" style="position:relative;">
+          <div class="compare-placeholder" id="ph-with">
+            <div class="ph-icon">❄️</div>
+            <p>Add photos/coolswine-with.jpg</p>
+          </div>
+          <img src="photos/coolswine-with.jpg"
+               alt="CoolSwine tool — with radiant cooling"
+               style="display:none; width:100%; position:absolute; top:0; left:0;"
+               onload="this.style.cssText='display:block;width:100%;'; document.getElementById('ph-with').style.display='none';" />
+        </div>
+        <div class="compare-caption">
+          <h3>Comfort Zone Restored</h3>
+          <p>A single 85W radiant panel overhead absorbs heat directly from the sow, pulling thermal load back within the safe comfort zone — without cooling the whole barn.</p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- SCIENCE BEHIND IT -->
+<section>
+  <div class="container">
+    <div class="science-grid">
+      <div>
+        <div class="section-label">The Science</div>
+        <h2>Built on Peer-Reviewed Swine Research</h2>
+        <p style="color:var(--muted); margin-bottom:.5rem">CoolSwine isn't a rule-of-thumb calculator. It models thermal physiology the way researchers do — accounting for metabolic heat generation, radiant exchange, convection, and evaporation specific to Sus scrofa.</p>
+        <ul class="science-list">
+          <li>Swine-specific metabolic and thermoregulatory parameters</li>
+          <li>Radiant Mean Temperature (RMT) modeling — not just dry-bulb air temp</li>
+          <li>Validated against field measurements from summer 2025 farrowing pilots</li>
+          <li>Linked to 10+ academic publications from the Clearly Cool research team</li>
+          <li>Developed at Princeton University and AIL Research</li>
+        </ul>
+      </div>
+      <div>
+        <blockquote class="science-quote">
+          "Conventional temperature-humidity indices were designed for humans or dairy cattle. CoolSwine applies the correct physiological model for pigs — which thermoregulate very differently, especially in farrowing."
+          <cite>— Dr. Eric Teitelbaum, Founder &amp; CTO, Clearly Cool</cite>
+        </blockquote>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<div class="cta-section">
+  <h2>Try CoolSwine Free — Right Now</h2>
+  <p>Model your barn conditions and see how radiant cooling changes the thermal outcome for your sows. No login, no download.</p>
+  <a class="cta-big" href="https://tinyurl.com/coolswine" target="_blank" rel="noopener">
+    🌡️ &nbsp;Open CoolSwine Tool
+  </a>
+  <span class="cta-url">tinyurl.com/coolswine</span>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <p>© 2026 Clearly Cool &nbsp;|&nbsp; <a href="mailto:hello@clearly-cool.com">hello@clearly-cool.com</a> &nbsp;|&nbsp; <a href="index.html">Home</a> &nbsp;|&nbsp; <a href="applications.html">Applications</a></p>
+</footer>
+
+</body>
+</html>

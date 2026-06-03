@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Applications — Clearly Cool Radiant Cooling</title>
+  <meta name="description" content="Clearly Cool radiant cooling for pork production, bus shelters, outdoor dining, athlete cooling, beach umbrellas, golf carts, and more." />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --navy:    #0d1f3c;
+      --blue:    #1a7ab5;
+      --blue-lt: #3aaee0;
+      --ice:     #e8f5fc;
+      --text:    #1a1a2e;
+      --muted:   #556;
+      --white:   #ffffff;
+      --amber:   #f0a500;
+      --max:     1100px;
+    }
+    body { font-family: 'Segoe UI', system-ui, sans-serif; color: var(--text); line-height: 1.6; }
+
+    /* ── NAV ── */
+    nav {
+      position: sticky; top: 0; z-index: 100;
+      background: var(--white);
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0 2rem; height: 80px;
+      box-shadow: 0 2px 8px rgba(0,0,0,.08);
+    }
+    .nav-logo img { height: 62px; display: block; }
+    .nav-links { display: flex; gap: 1.8rem; list-style: none; align-items: center; }
+    .nav-links a { color: var(--navy); text-decoration: none; font-size: .95rem; font-weight: 500; transition: color .2s; }
+    .nav-links a:hover, .nav-links a.active { color: var(--blue); }
+    .nav-cta { background: var(--amber); color: var(--white); padding: .5rem 1.3rem; border-radius: 5px; font-weight: 700; font-size: .9rem; text-decoration: none; transition: background .2s; }
+    .nav-cta:hover { background: #d4920a; }
+    @media (max-width: 700px) { .nav-links { gap: .9rem; } .nav-links li.hide-sm { display: none; } }
+
+    /* ── PAGE HERO ── */
+    .page-hero {
+      background: linear-gradient(135deg, var(--navy) 0%, #1a4a7a 100%);
+      color: var(--white); text-align: center; padding: 5rem 1.5rem 4rem;
+    }
+    .page-hero .section-label { color: var(--blue-lt); }
+    .page-hero h1 { font-size: clamp(2rem, 4vw, 3rem); font-weight: 800; margin-bottom: 1rem; }
+    .page-hero p { font-size: 1.1rem; opacity: .85; max-width: 620px; margin: 0 auto; }
+
+    /* ── SECTION LABELS / HEADINGS ── */
+    .section-label { text-transform: uppercase; letter-spacing: .12em; font-size: .75rem; color: var(--blue-lt); font-weight: 700; margin-bottom: .5rem; }
+    h2 { font-size: clamp(1.5rem, 3vw, 2rem); font-weight: 800; color: var(--navy); margin-bottom: .75rem; }
+
+    /* ── CATEGORY SECTIONS ── */
+    .category { padding: 5rem 1.5rem; }
+    .category:nth-child(even) { background: var(--ice); }
+    .container { max-width: var(--max); margin: 0 auto; }
+
+    .cat-header { margin-bottom: 2.5rem; }
+    .cat-header p { font-size: 1rem; color: var(--muted); max-width: 660px; margin-top: .5rem; }
+
+    /* ── CARD GRIDS ── */
+    .cards-2 { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 2rem; }
+    .cards-3 { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 2rem; }
+    .card { background: var(--white); border-radius: 10px; overflow: hidden; box-shadow: 0 2px 12px rgba(0,0,0,.07); }
+    .card img { width: 100%; height: 240px; object-fit: cover; display: block; }
+    .card-placeholder {
+      width: 100%; height: 240px; display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
+      background: linear-gradient(135deg, #d6eef8 0%, #b8dff5 100%);
+      color: var(--blue); font-size: .85rem; gap: .5rem;
+    }
+    .card-placeholder .ph-icon { font-size: 2.5rem; opacity: .5; }
+    .card-placeholder span { opacity: .6; font-style: italic; }
+    .card-body { padding: 1.3rem 1.5rem; }
+    .card-body h3 { color: var(--navy); font-size: 1.05rem; margin-bottom: .4rem; }
+    .card-body p { font-size: .9rem; color: var(--muted); }
+
+    /* ── FEATURE SPLIT (text + image side by side) ── */
+    .feature-split { display: grid; grid-template-columns: 1fr 1fr; gap: 3.5rem; align-items: center; }
+    @media (max-width: 720px) { .feature-split { grid-template-columns: 1fr; } }
+    .feature-split img { width: 100%; border-radius: 10px; box-shadow: 0 4px 20px rgba(0,0,0,.1); }
+    .feature-split .text p { color: var(--muted); margin-bottom: 1rem; font-size: .95rem; }
+    .feature-split .text ul { list-style: none; }
+    .feature-split .text ul li { display: flex; gap: .6rem; align-items: flex-start; margin-bottom: .6rem; font-size: .9rem; color: var(--muted); }
+    .feature-split .text ul li::before { content: '✓'; color: var(--blue-lt); font-weight: 700; flex-shrink: 0; }
+
+    /* ── CTA BAR ── */
+    .cta-bar { background: var(--navy); color: var(--white); text-align: center; padding: 4rem 1.5rem; }
+    .cta-bar h2 { color: var(--white); margin-bottom: 1rem; }
+    .cta-bar p { opacity: .8; max-width: 500px; margin: 0 auto 2rem; }
+    .btn { padding: .75rem 2rem; border-radius: 5px; font-weight: 700; text-decoration: none; font-size: 1rem; display: inline-block; transition: all .2s; }
+    .btn-amber { background: var(--amber); color: var(--white); }
+    .btn-amber:hover { background: #d4920a; }
+
+    /* ── FOOTER ── */
+    footer { background: #07111f; color: rgba(255,255,255,.45); text-align: center; padding: 1.4rem; font-size: .83rem; }
+    footer a { color: rgba(255,255,255,.55); text-decoration: none; }
+    footer a:hover { color: var(--white); }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a class="nav-logo" href="index.html">
+    <img src="photos/logo.png" alt="Clearly-cool.com" />
+  </a>
+  <ul class="nav-links">
+    <li class="hide-sm"><a href="index.html#how-it-works">How It Works</a></li>
+    <li class="hide-sm"><a href="index.html#product">Product</a></li>
+    <li class="hide-sm"><a href="index.html#team">About</a></li>
+    <li class="hide-sm"><a href="index.html#partnerships">Partnerships</a></li>
+    <li><a href="applications.html" class="active">Applications</a></li>
+    <li><a href="coolswine.html">CoolSwine Tool</a></li>
+  </ul>
+  <a class="nav-cta" href="mailto:hello@clearly-cool.com?subject=Application Inquiry">Contact Us</a>
+</nav>
+
+<!-- PAGE HERO -->
+<div class="page-hero">
+  <div class="section-label">Applications</div>
+  <h1>Radiant Cooling for People &amp; Animals</h1>
+  <p>One technology platform — from farrowing rooms to beach umbrellas. Wherever heat stress limits comfort or productivity, Clearly Cool delivers targeted relief at a fraction of the energy cost.</p>
+</div>
+
+<!-- ══════════════════════════════════
+     SECTION 1: PORK PRODUCTION
+     ══════════════════════════════════ -->
+<section class="category" id="pork">
+  <div class="container">
+    <div class="cat-header">
+      <div class="section-label">Agriculture</div>
+      <h2>🐖 Pork Production</h2>
+      <p>Heat stress in farrowing and gestation costs producers in reduced litter size, lower daily gain, and impaired reproductive performance. Clearly Cool targets cooling at the animal — not the whole building.</p>
+    </div>
+    <div class="feature-split" style="margin-bottom: 3rem;">
+      <img src="photos/Barn%20install%20with%20sow%20and%20piglets%20under%20actual%20panel.png"
+           alt="Sow and piglets under Clearly Cool radiant panel at Double Brook Farm" />
+      <div class="text">
+        <div class="section-label">Farrowing</div>
+        <h2>Crate-Level Cooling</h2>
+        <p>One panel per crate, mounted directly overhead. Cools the sow through radiant heat exchange while leaving the piglet zone unaffected.</p>
+        <ul>
+          <li>No modifications to existing crate hardware</li>
+          <li>85W per panel — runs off a standard outlet</li>
+          <li>Solar-pairable for off-grid barns</li>
+          <li>Silent, draftless — no stress on newborn piglets</li>
+        </ul>
+      </div>
+    </div>
+    <div class="cards-2">
+      <div class="card">
+        <img src="photos/Sow%20with%20piglets%20in%20demonstration%20setup%20at%20Double%20Brook%20farms%20in%20Hopewell%20New%20Jersey.jpeg"
+             alt="Sow with piglets in demonstration setup at Double Brook Farm, Hopewell NJ" />
+        <div class="card-body">
+          <h3>Gestation — Cooling Stations</h3>
+          <p>Covered canopy stations let sows self-select cooling as needed. Panels can integrate lighting and heating for year-round multi-function use across the barn.</p>
+        </div>
+      </div>
+      <div class="card">
+        <img src="photos/Radiant%20panel%20in%20barn%20with%20thermal%20camera%20showing%20the%20cool%20underside.jpeg"
+             alt="Thermal camera showing cool underside of Clearly Cool radiant panel in barn" />
+        <div class="card-body">
+          <h3>Packaged Radiant Heat Pump</h3>
+          <p>Self-contained unit — no external chiller. Ideal for new builds or retrofitting existing barns. Scales across rows with simple electrical hookup. Patent pending.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════
+     SECTION 2: TRANSIT & PUBLIC SPACE
+     ══════════════════════════════════ -->
+<section class="category" id="public">
+  <div class="container">
+    <div class="cat-header">
+      <div class="section-label">Urban &amp; Transit</div>
+      <h2>🚌 Bus Shelters &amp; Public Cooling</h2>
+      <p>Cities are deploying radiant cooling at transit stops and public plazas to protect residents during heat waves — without the noise, humidity, or energy cost of air conditioning.</p>
+    </div>
+    <div class="cards-2">
+      <div class="card">
+        <!-- photos/bus-shelter-metro.jpg — the METRO wooden shelter photo -->
+        <img src="photos/bus-shelter-metro.jpg"
+             alt="Clearly Cool radiant panel installed in METRO bus shelter"
+             onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';" />
+        <div class="card-placeholder" style="display:none;"><div class="ph-icon">🚌</div><span>Add photos/bus-shelter-metro.jpg</span></div>
+        <div class="card-body">
+          <h3>Transit Stop Cooling</h3>
+          <p>Radiant panels installed in bus shelter canopies provide meaningful heat relief for waiting passengers — solar-powered, silent, and maintenance-free.</p>
+        </div>
+      </div>
+      <div class="card">
+        <img src="photos/Radiant%20pavilion%20from%20governors%20island%20demonstration%20with%20Penn%20and%20Henny%20Larson.jpg"
+             alt="Clearly Cool radiant cooling pavilion demonstration at Governors Island" />
+        <div class="card-body">
+          <h3>Urban Plazas &amp; Parks</h3>
+          <p>Standalone cooling pavilions extend the usable season of parks and public gathering spaces. Featured in Bloomberg and Washington Post coverage of urban heat solutions.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════
+     SECTION 3: OUTDOOR DINING
+     ══════════════════════════════════ -->
+<section class="category" id="dining">
+  <div class="container">
+    <div class="cat-header">
+      <div class="section-label">Hospitality</div>
+      <h2>🍽️ Outdoor Dining</h2>
+      <p>Extend your patio season — in summer or shoulder seasons — without propane heaters or commercial HVAC. Clearly Cool panels mount unobtrusively into pergolas, awnings, and overhead structures.</p>
+    </div>
+    <div class="feature-split">
+      <div class="text">
+        <h2>Comfort Without the Equipment</h2>
+        <p>Propane patio heaters are increasingly banned in urban areas and emit CO₂. Our radiant panels provide both cooling and heating — silent, clean, and architecturally low-profile.</p>
+        <ul>
+          <li>Cooling in summer, heating in cool seasons</li>
+          <li>No noise, no flame, no CO₂ emissions</li>
+          <li>Integrates into existing pergola or awning structures</li>
+          <li>Water-cooled translucent panel option maintains natural light</li>
+        </ul>
+      </div>
+      <img src="photos/Outdoor%20dining%20Gemini%20conceptualization.png"
+           alt="Outdoor dining with Clearly Cool radiant cooling panels" />
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════
+     SECTION 4: PATIOS & LEISURE
+     ══════════════════════════════════ -->
+<section class="category" id="patio">
+  <div class="container">
+    <div class="cat-header">
+      <div class="section-label">Residential &amp; Leisure</div>
+      <h2>🏡 Patios &amp; Outdoor Living</h2>
+      <p>High-end radiant cooling for homeowners and hospitality venues who want outdoor spaces that are genuinely comfortable in summer heat.</p>
+    </div>
+    <div class="cards-3">
+      <div class="card">
+        <img src="photos/Patio%20cooling%20Gemini%20conceptualization.png"
+             alt="Residential patio with Clearly Cool radiant cooling" />
+        <div class="card-body">
+          <h3>Residential Patios</h3>
+          <p>Mount panels in pergolas or overhead structures. Reclaim your outdoor space even on the hottest days of the year.</p>
+        </div>
+      </div>
+      <div class="card">
+        <img src="photos/Clealry-cool%20demonstration%20pavilion%20hero%20shot%20with%20lable.jpg"
+             alt="Clearly Cool radiant cooling demonstration pavilion" />
+        <div class="card-body">
+          <h3>Beach Umbrellas</h3>
+          <p>A chilled panel integrated into a beach umbrella canopy dramatically reduces radiant heat exposure — the kind of shade that actually keeps you cool.</p>
+        </div>
+      </div>
+      <div class="card">
+        <img src="photos/IMG_9591%20(1).jpg"
+             alt="Clearly Cool deployable radiant cooling pavilion" />
+        <div class="card-body">
+          <h3>Deployable Pavilions</h3>
+          <p>Rapidly deployable cooling structures for events, pop-ups, and temporary outdoor areas. Packs up and redeploys in minutes.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════
+     SECTION 5: ATHLETE & WORKSITE
+     ══════════════════════════════════ -->
+<section class="category" id="athlete">
+  <div class="container">
+    <div class="cat-header">
+      <div class="section-label">Sport &amp; Worksite</div>
+      <h2>🏃 Athlete Cooling &amp; Work Sites</h2>
+      <p>Heat is one of the leading causes of reduced athletic performance and outdoor worksite accidents. Targeted radiant cooling keeps people cooler in the moments it counts most.</p>
+    </div>
+    <div class="cards-3">
+      <div class="card">
+        <img src="photos/Clearl-cool%20sport%20dugout%20conceptualization%20-%20cool%20players%20not%20just%20drinks.png"
+             alt="Clearly Cool sport dugout conceptualization — cool players not just drinks" />
+        <div class="card-body">
+          <h3>Sports Dugouts &amp; Benches</h3>
+          <p>Radiant panels installed in dugout canopies and sideline shelters keep athletes recovered and ready between play — no misting, no fog.</p>
+        </div>
+      </div>
+      <div class="card">
+        <!-- photos/coolcart-infographic.jpg — the CoolCart™ by ClearlyCool graphic -->
+        <img src="photos/coolcart-infographic.jpg"
+             alt="CoolCart™ by ClearlyCool — radiant cooling for golf carts"
+             onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';" />
+        <div class="card-placeholder" style="display:none;"><div class="ph-icon">⛳</div><span>Add photos/coolcart-infographic.jpg</span></div>
+        <div class="card-body">
+          <h3>CoolCart™ — Golf Cart Cooling</h3>
+          <p>Radiant cooling panel integrated into the cart canopy with solar power on top, refrigerant cooling pipes, and cold drink holders — up to 20°F cooler feeling. Passive, quiet, Made in the USA.</p>
+        </div>
+      </div>
+      <div class="card">
+        <img src="photos/Clearly-cool%20construction%20site.png"
+             alt="Clearly Cool radiant cooling at outdoor construction site" />
+        <div class="card-body">
+          <h3>Outdoor Work Sites</h3>
+          <p>Portable cooling stations for construction crews, outdoor events staff, and agricultural workers — deployable, solar-compatible, and OSHA-aligned.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<div class="cta-bar">
+  <h2>Ready to Explore an Application?</h2>
+  <p>We work with producers, municipalities, hospitality groups, and developers to design the right system for each use case.</p>
+  <a class="btn btn-amber" href="mailto:hello@clearly-cool.com?subject=Application Inquiry">Get in Touch</a>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <p>© 2026 Clearly Cool &nbsp;|&nbsp; <a href="mailto:hello@clearly-cool.com">hello@clearly-cool.com</a> &nbsp;|&nbsp; <a href="index.html">Home</a></p>
+</footer>
+
+</body>
+</html>

@@ -1,0 +1,429 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Clearly Cool — Radiant Cooling for Pork Production</title>
+  <meta name="description" content="Clearly Cool's plug-and-play radiant panels reduce heat stress in farrowing and gestation — 85W, no plumbing, solar-ready." />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --navy:    #0d1f3c;
+      --blue:    #1a7ab5;
+      --blue-lt: #3aaee0;
+      --ice:     #e8f5fc;
+      --text:    #1a1a2e;
+      --muted:   #556;
+      --white:   #ffffff;
+      --amber:   #f0a500;
+      --max:     1100px;
+    }
+    body { font-family: 'Segoe UI', system-ui, sans-serif; color: var(--text); line-height: 1.6; }
+
+    /* ── NAV ── */
+    nav {
+      position: sticky; top: 0; z-index: 100;
+      background: var(--white);
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0 2rem; height: 80px;
+      box-shadow: 0 2px 8px rgba(0,0,0,.08);
+    }
+    .nav-logo img { height: 52px; display: block; }
+    .nav-links { display: flex; gap: 1.8rem; list-style: none; align-items: center; }
+    .nav-links a { color: var(--navy); text-decoration: none; font-size: .95rem; font-weight: 500; transition: color .2s; }
+    .nav-links a:hover { color: var(--blue); }
+    .nav-links a.active { color: var(--blue); }
+    .nav-cta {
+      background: var(--amber); color: var(--white); border: none;
+      padding: .5rem 1.3rem; border-radius: 5px; font-weight: 700; font-size: .9rem;
+      text-decoration: none; transition: background .2s; white-space: nowrap;
+    }
+    .nav-cta:hover { background: #d4920a; }
+    @media (max-width: 700px) {
+      .nav-links { gap: .9rem; }
+      .nav-links li.hide-sm { display: none; }
+    }
+
+    /* ── HERO ── */
+    .hero {
+      position: relative; min-height: 86vh;
+      display: flex; align-items: center; justify-content: center;
+      background:
+        linear-gradient(to bottom, rgba(8,22,45,.72) 0%, rgba(8,22,45,.50) 55%, rgba(8,22,45,.78) 100%),
+        url('photos/large-pig-barn.jpg')
+        center/cover no-repeat;
+      text-align: center; color: var(--white); padding: 4rem 1.5rem;
+    }
+    .hero-badge {
+      display: inline-block; background: var(--amber); color: var(--white);
+      font-size: .78rem; font-weight: 700; letter-spacing: .1em; text-transform: uppercase;
+      padding: .3rem 1rem; border-radius: 20px; margin-bottom: 1.3rem;
+    }
+    .hero h1 { font-size: clamp(2rem, 5vw, 3.5rem); font-weight: 800; line-height: 1.12; margin-bottom: 1.1rem; }
+    .hero h1 em { color: #7fd4f5; font-style: normal; }
+    .hero p { font-size: clamp(1rem, 2vw, 1.2rem); max-width: 620px; margin: 0 auto 2rem; opacity: .92; }
+    .hero-btns { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
+    .btn { padding: .75rem 2rem; border-radius: 5px; font-weight: 700; text-decoration: none; font-size: 1rem; display: inline-block; transition: all .2s; }
+    .btn-amber { background: var(--amber); color: var(--white); }
+    .btn-amber:hover { background: #d4920a; }
+    .btn-outline-white { border: 2px solid rgba(255,255,255,.7); color: var(--white); }
+    .btn-outline-white:hover { border-color: var(--white); background: rgba(255,255,255,.1); }
+    .btn-blue { background: var(--blue); color: var(--white); }
+    .btn-blue:hover { background: #1565a0; }
+
+    /* ── STATS BAR ── */
+    .stats-bar { background: var(--navy); color: var(--white); padding: 2.5rem 1.5rem; }
+    .stats-grid { display: flex; flex-wrap: wrap; justify-content: center; gap: 2.5rem; max-width: var(--max); margin: 0 auto; }
+    .stat { text-align: center; }
+    .stat-num { font-size: 2.4rem; font-weight: 800; color: #7fd4f5; }
+    .stat-label { font-size: .85rem; opacity: .75; }
+
+    /* ── SECTIONS ── */
+    section { padding: 5rem 1.5rem; }
+    .container { max-width: var(--max); margin: 0 auto; }
+    .section-label { text-transform: uppercase; letter-spacing: .12em; font-size: .75rem; color: var(--blue-lt); font-weight: 700; margin-bottom: .5rem; }
+    h2 { font-size: clamp(1.6rem, 3vw, 2.2rem); font-weight: 800; color: var(--navy); margin-bottom: 1rem; }
+    .lead { font-size: 1.05rem; color: var(--muted); max-width: 680px; margin-bottom: 2.5rem; }
+
+    /* ── PROBLEM CARDS ── */
+    .problem { background: var(--ice); }
+    .problem-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 1.5rem; }
+    .problem-card { background: var(--white); border-left: 4px solid var(--blue-lt); padding: 1.5rem; border-radius: 6px; box-shadow: 0 2px 8px rgba(0,0,0,.05); }
+    .problem-card h3 { font-size: 1rem; color: var(--navy); margin-bottom: .5rem; }
+    .problem-card p { font-size: .9rem; color: var(--muted); }
+
+    /* ── PARTNERSHIPS ── */
+    .partnerships { background: var(--navy); color: var(--white); }
+    .partnerships .section-label { color: var(--blue-lt); }
+    .partnerships h2 { color: var(--white); }
+    .partnerships .lead { color: rgba(255,255,255,.75); }
+    .partner-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 1.5rem; margin-top: 2rem; }
+    .partner-card { background: rgba(255,255,255,.07); border: 1px solid rgba(255,255,255,.12); border-radius: 10px; padding: 1.6rem; }
+    .partner-card h3 { color: var(--white); font-size: 1rem; margin-bottom: .5rem; }
+    .partner-card p { font-size: .88rem; color: rgba(255,255,255,.65); margin-bottom: 1.2rem; }
+    .partner-card a { font-size: .88rem; font-weight: 700; color: var(--amber); text-decoration: none; }
+    .partner-card a:hover { text-decoration: underline; }
+
+    /* ── HOW IT WORKS ── */
+    .how-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 3.5rem; align-items: center; }
+    @media (max-width: 720px) { .how-grid { grid-template-columns: 1fr; } }
+    .how-img { width: 100%; border-radius: 10px; box-shadow: 0 4px 20px rgba(0,0,0,.12); }
+    .steps { list-style: none; margin-top: 1.5rem; }
+    .steps li { display: flex; gap: 1rem; margin-bottom: 1.4rem; align-items: flex-start; }
+    .step-num { flex-shrink: 0; width: 36px; height: 36px; border-radius: 50%; background: var(--blue); color: var(--white); font-weight: 800; font-size: .9rem; display: flex; align-items: center; justify-content: center; }
+    .step-text strong { display: block; color: var(--navy); margin-bottom: .15rem; }
+    .step-text span { font-size: .9rem; color: var(--muted); }
+
+    /* ── APPLICATIONS PREVIEW ── */
+    .apps-preview { background: var(--ice); }
+    .apps-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1.8rem; }
+    .app-card { background: var(--white); border-radius: 10px; overflow: hidden; box-shadow: 0 2px 12px rgba(0,0,0,.07); }
+    .app-card img { width: 100%; height: 220px; object-fit: cover; display: block; }
+    .app-card-body { padding: 1.2rem 1.4rem; }
+    .app-card-body h3 { color: var(--navy); font-size: 1rem; margin-bottom: .35rem; }
+    .app-card-body p { font-size: .88rem; color: var(--muted); }
+    .apps-more { text-align: center; margin-top: 2.5rem; }
+
+    /* ── PRODUCT ── */
+    .product-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 3.5rem; align-items: center; }
+    @media (max-width: 720px) { .product-grid { grid-template-columns: 1fr; } }
+    .product-img { width: 100%; border-radius: 10px; box-shadow: 0 4px 20px rgba(0,0,0,.12); }
+    .spec-list { list-style: none; margin: 1.5rem 0; }
+    .spec-list li { display: flex; gap: .75rem; align-items: flex-start; margin-bottom: .7rem; font-size: .93rem; }
+    .spec-list li::before { content: '✓'; color: var(--blue-lt); font-weight: 700; flex-shrink: 0; }
+
+    /* ── PRESS ── */
+    .press { text-align: center; }
+    .press-logos { display: flex; flex-wrap: wrap; justify-content: center; align-items: center; gap: 3rem; margin-top: 2rem; }
+    .press-logos a img { height: 34px; filter: grayscale(1) opacity(.5); transition: filter .2s; }
+    .press-logos a:hover img { filter: grayscale(0) opacity(1); }
+    .press-logos a.logo-lg img { height: 52px; }
+
+    /* ── TEAM ── */
+    .team-bg { background: var(--ice); }
+    .team-grid { display: flex; flex-wrap: wrap; gap: 2rem; justify-content: center; margin-top: 2rem; }
+    .team-card { text-align: center; max-width: 190px; }
+    .team-card img { width: 130px; height: 130px; object-fit: cover; border-radius: 50%; margin-bottom: .75rem; box-shadow: 0 2px 10px rgba(0,0,0,.1); }
+    .team-card h3 { font-size: .95rem; color: var(--navy); }
+    .team-card p { font-size: .82rem; color: var(--muted); }
+
+    /* ── CONTACT ── */
+    .contact { background: var(--navy); color: var(--white); text-align: center; padding: 5rem 1.5rem; }
+    .contact h2 { color: var(--white); }
+    .contact p { opacity: .82; max-width: 520px; margin: 1rem auto 2rem; }
+
+    /* ── FOOTER ── */
+    footer { background: #07111f; color: rgba(255,255,255,.45); text-align: center; padding: 1.4rem; font-size: .83rem; }
+    footer a { color: rgba(255,255,255,.55); text-decoration: none; }
+    footer a:hover { color: var(--white); }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a class="nav-logo" href="index.html">
+    <img src="photos/logo.png" alt="Clearly-cool.com" />
+  </a>
+  <ul class="nav-links">
+    <li class="hide-sm"><a href="#how-it-works">How It Works</a></li>
+    <li class="hide-sm"><a href="#product">Product</a></li>
+    <li class="hide-sm"><a href="#team">About</a></li>
+    <li class="hide-sm"><a href="#partnerships">Partnerships</a></li>
+    <li><a href="applications.html">Applications</a></li>
+    <li><a href="coolswine.html">CoolSwine Tool</a></li>
+  </ul>
+  <a class="nav-cta" href="mailto:hello@clearly-cool.com?subject=World Pork Expo Inquiry">Contact Us</a>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <!-- To use your own photo: background-image url to 'photos/sow-farrowing.jpg' in the CSS above -->
+  <div>
+    <img src="photos/logo-hero.png" alt="Clearly Cool" style="height:110px; margin-bottom:1.5rem; display:block; margin-left:auto; margin-right:auto;" />
+<h1><em>Cool Pigs, Not Barns.</em></h1>
+    <p>Clearly Cool's plug-and-play radiant panels target heat relief directly over each animal — 85 watts, no plumbing, solar-ready. Proven in summer 2025 farrowing pilots.</p>
+    <div class="hero-btns">
+      <a class="btn btn-amber" href="#partnerships">Sales &amp; Partnerships</a>
+      <a class="btn btn-outline-white" href="#how-it-works">See How It Works</a>
+    </div>
+  </div>
+</section>
+
+<!-- WORLD PORK EXPO BANNER -->
+<div style="background: var(--amber); color: var(--white); text-align: center; padding: 3rem 1.5rem;">
+  <div style="max-width: var(--max); margin: 0 auto;">
+    <div style="font-size: .8rem; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; opacity: .85; margin-bottom: .5rem;">🐖 World Pork Expo · Des Moines, IA · June 2025</div>
+    <h2 style="color: var(--white); font-size: clamp(1.6rem, 3vw, 2.2rem); margin-bottom: .75rem;">Come See Us at the Expo</h2>
+    <p style="font-size: 1.05rem; opacity: .92; max-width: 540px; margin: 0 auto 1.8rem;">Find us south of the Varied Industries Building at booth <strong>SV102</strong> for a live demo of our plug-and-play radiant cooling panels.</p>
+    <a class="btn" href="mailto:hello@clearly-cool.com?subject=World Pork Expo Inquiry" style="background: var(--white); color: var(--amber);">hello@clearly-cool.com</a>
+  </div>
+</div>
+
+<!-- STATS BAR -->
+<div class="stats-bar">
+  <div class="stats-grid">
+    <div class="stat"><div class="stat-num">85W</div><div class="stat-label">per panel — less than a light bulb</div></div>
+    <div class="stat"><div class="stat-num">6</div><div class="stat-label">issued &amp; pending patents</div></div>
+    <div class="stat"><div class="stat-num">10+</div><div class="stat-label">academic publications</div></div>
+    <div class="stat"><div class="stat-num">6</div><div class="stat-label">global field trials</div></div>
+    <div class="stat"><div class="stat-num">0</div><div class="stat-label">plumbing required</div></div>
+  </div>
+</div>
+
+<!-- PROBLEM -->
+<section class="problem">
+  <div class="container">
+    <div class="section-label">The Problem</div>
+    <h2>Heat Stress Costs Pork Producers Millions Every Year</h2>
+    <p class="lead">High temperatures reduce feed intake, reproductive performance, and daily gain. Conventional barn cooling is expensive, energy-hungry, and impossible to target where it counts.</p>
+    <div class="problem-grid">
+      <div class="problem-card">
+        <h3>Farrowing Rooms</h3>
+        <p>Sows need to stay cool while piglets need warmth. Whole-room cooling forces a losing compromise. Targeted radiant cooling over each sow solves this directly.</p>
+      </div>
+      <div class="problem-card">
+        <h3>Gestation Barns</h3>
+        <p>High stocking density makes uniform cooling difficult and wasteful. Individual radiant panels cool animals exactly where they rest — no overcooling the whole building.</p>
+      </div>
+      <div class="problem-card">
+        <h3>Energy &amp; Infrastructure</h3>
+        <p>Evaporative and compressor-based systems are expensive to install and run. At 85W per panel, our system runs off solar PV — no new electrical infrastructure needed.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PARTNERSHIPS -->
+<section class="partnerships" id="partnerships">
+  <div class="container">
+    <div class="section-label">Sales &amp; Partnerships</div>
+    <h2>Panels Are Shipping. Partners Wanted.</h2>
+    <p class="lead">Clearly Cool radiant panels are in production today — in small volumes, ready to scale. We're looking for producers, distributors, and strategic partners to bring this technology to market.</p>
+    <div class="partner-grid">
+      <div class="partner-card">
+        <h3>🐖 Producer Pilots</h3>
+        <p>Run a pilot on your operation this season. Panels ship now, full technical support included, preferred pricing on future orders.</p>
+        <a href="mailto:hello@clearly-cool.com?subject=Producer Pilot Inquiry">Inquire About a Pilot →</a>
+      </div>
+      <div class="partner-card">
+        <h3>🏭 Distribution &amp; Integration</h3>
+        <p>Add a differentiated product line. Volume pricing, territory arrangements, co-branded marketing, and installation training available.</p>
+        <a href="mailto:hello@clearly-cool.com?subject=Distribution Inquiry">Become a Distributor →</a>
+      </div>
+      <div class="partner-card">
+        <h3>🚀 Strategic Co-Innovation</h3>
+        <p>Co-develop the next generation. Joint IP, manufacturing scale-up investment, exclusive market segments. First movers define this category.</p>
+        <a href="mailto:hello@clearly-cool.com?subject=Strategic Partnership Inquiry">Let's Talk Strategy →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- HOW IT WORKS -->
+<section id="how-it-works">
+  <div class="container">
+    <div class="how-grid">
+      <div>
+        <div class="section-label">The Technology</div>
+        <h2>Radiant Cooling — Targeted, Low-Power, Proven</h2>
+        <p style="color:var(--muted)">Instead of cooling the air, we place a chilled surface directly above the animal. The panel absorbs radiant heat from the sow's body — the same physics that makes shade feel cool, working 24/7.</p>
+        <ul class="steps">
+          <li>
+            <div class="step-num">1</div>
+            <div class="step-text"><strong>Plug In</strong><span>Standard 120V outlet. No plumbing, no refrigerant lines, no licensed contractor needed.</span></div>
+          </li>
+          <li>
+            <div class="step-num">2</div>
+            <div class="step-text"><strong>Panel Chills</strong><span>The surface drops below body temperature, creating a radiant "cold sky" directly over each sow.</span></div>
+          </li>
+          <li>
+            <div class="step-num">3</div>
+            <div class="step-text"><strong>Animal Stays Cool</strong><span>Heat radiates from the sow to the panel — no fans, no drafts, no wet bedding, no stress on piglets.</span></div>
+          </li>
+          <li>
+            <div class="step-num">4</div>
+            <div class="step-text"><strong>Pair with Solar</strong><span>At 85W each, a small PV array can power an entire row of farrowing crates off-grid.</span></div>
+          </li>
+        </ul>
+      </div>
+      <div>
+        <!-- Replace src with: photos/panel-install.jpg -->
+        <img class="how-img"
+          src="photos/Barn%20install%20with%20sow%20and%20piglets%20under%20actual%20panel.png"
+          alt="Clearly Cool radiant panel installed over sow and piglets at Double Brook Farm" />
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- APPLICATIONS PREVIEW (pork only on this page) -->
+<section class="apps-preview" id="applications-preview">
+  <div class="container">
+    <div class="section-label">Pork Applications</div>
+    <h2>Proven in Farrowing &amp; Gestation</h2>
+    <p class="lead">Our summer 2025 pilot demonstrated meaningful reductions in heat load on individual sows. Two configurations serve different barn layouts.</p>
+    <div class="apps-grid">
+      <div class="app-card">
+        <img src="photos/IMG_4022%20(2).jpeg"
+             alt="Sow with piglets under Clearly Cool radiant panel at Double Brook Farm" />
+        <div class="app-card-body">
+          <h3>Farrowing — Crate-Level Cooling</h3>
+          <p>One panel per crate, hung directly above the sow. Cools the animal while the piglet zone stays warm. No modifications to existing crates.</p>
+        </div>
+      </div>
+      <div class="app-card">
+        <img src="photos/IMG_9976%20(2).jpg"
+             alt="Clearly Cool farrowing crate with radiant cooling panel" />
+        <div class="app-card-body">
+          <h3>Gestation — Covered Cooling Stations</h3>
+          <p>Canopy-style stations with radiant panels let sows self-select cooling as needed. Can integrate lighting and optional heating for year-round use.</p>
+        </div>
+      </div>
+      <div class="app-card">
+        <img src="photos/IMG_9492%20(1).jpeg"
+             alt="Clearly Cool packaged radiant panel unit" />
+        <div class="app-card-body">
+          <h3>Packaged Radiant Heat Pump</h3>
+          <p>Self-contained unit — no external chiller required. Ideal for new builds or retrofits. Easily scales across barn rows. Patent pending.</p>
+        </div>
+      </div>
+    </div>
+    <div class="apps-more">
+      <p style="color:var(--muted); margin-bottom:1rem;">Clearly Cool also serves outdoor dining, bus shelters, athlete cooling, patios, and more.</p>
+      <a class="btn btn-blue" href="applications.html">See All Applications →</a>
+    </div>
+  </div>
+</section>
+
+<!-- PRODUCT SPECS -->
+<section id="product">
+  <div class="container">
+    <div class="product-grid">
+      <div>
+        <div class="section-label">Product</div>
+        <h2>Plug-and-Play Radiant Panel</h2>
+        <p style="color:var(--muted)">Designed from the start for agricultural environments — durable, simple to mount, built to run for years with minimal maintenance.</p>
+        <ul class="spec-list">
+          <li>85W draw — comparable to a single bulb</li>
+          <li>Standard 120V outlet — no special wiring</li>
+          <li>No plumbing or refrigerant lines</li>
+          <li>Mounts above individual crates or stalls</li>
+          <li>Solar PV compatible — off-grid capable</li>
+          <li>Custom sizes available for volume orders</li>
+          <li>6 issued and pending patents protecting core tech</li>
+        </ul>
+        <a class="btn btn-amber" href="mailto:hello@clearly-cool.com?subject=Pork Product Inquiry">Request Pricing</a>
+      </div>
+      <div>
+        <img class="product-img"
+          src="photos/IMG_0137%20(1).jpg"
+          alt="Clearly Cool radiant panel installed in barn" />
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PRESS -->
+<section class="press">
+  <div class="container">
+    <div class="section-label">As Seen In</div>
+    <h2>Backed by Peer-Reviewed Science</h2>
+    <div class="press-logos">
+      <a class="logo-lg" href="https://www.washingtonpost.com/climate-solutions/2020/09/10/radiant-cooling-climate-air-conditioning/" target="_blank" rel="noopener">
+        <img src="https://static.wixstatic.com/media/3f6285_0d4d23d9e4d34739be6eb46117256226~mv2.png/v1/fill/w_270,h_193,al_c,q_85/3f6285_0d4d23d9e4d34739be6eb46117256226~mv2.png" alt="Washington Post" />
+      </a>
+      <a href="https://www.scientificamerican.com/article/a-better-way-to-cool-ourselves/" target="_blank" rel="noopener">
+        <img src="https://static.wixstatic.com/media/3f6285_8f62bf7c857a4cd0817915b0c01c7e4f~mv2.png/v1/fill/w_278,h_79,al_c,q_85/3f6285_8f62bf7c857a4cd0817915b0c01c7e4f~mv2.png" alt="Scientific American" />
+      </a>
+      <a class="logo-lg" href="https://www.bloomberg.com/news/features/2024-06-14/cooling-parks-will-help-cities-during-record-breaking-heat-waves" target="_blank" rel="noopener">
+        <img src="https://static.wixstatic.com/media/3f6285_1c5ce7b8d8384d46a79dca44b8f0a47b~mv2.png/v1/fill/w_278,h_150,al_c,q_85/3f6285_1c5ce7b8d8384d46a79dca44b8f0a47b~mv2.png" alt="Bloomberg" />
+      </a>
+      <a href="https://www.pnas.org/doi/abs/10.1073/pnas.2001678117" target="_blank" rel="noopener">
+        <img src="https://static.wixstatic.com/media/3f6285_bb3dd57ebabf4538ac04b17093b1c774~mv2.png/v1/fill/w_216,h_150,al_c,q_85/3f6285_bb3dd57ebabf4538ac04b17093b1c774~mv2.png" alt="PNAS" />
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- TEAM -->
+<section class="team-bg" id="team">
+  <div class="container">
+    <div class="section-label">Our Team</div>
+    <h2>70+ Years of Thermal Comfort R&amp;D</h2>
+    <p class="lead">Clearly Cool is a partnership between <a href="https://ailresearch.com" target="_blank" rel="noopener" style="color:var(--blue); font-weight:600;">AIL Research Inc.</a> and the <a href="https://chaos.princeton.edu" target="_blank" rel="noopener" style="color:var(--blue); font-weight:600;">CHAOS Lab at Princeton University</a> — together developing, patenting, and commercializing a new generation of radiant cooling systems.</p>
+    <div class="team-grid">
+      <div class="team-card">
+        <img src="photos/Eric%20Teitelbaum%20deomstrating%20the%20difference%20between%20infrared%20thermal%20radiaiton%20transparency%20and%20visible%20light%20transparency.jpg" alt="Dr. Eric Teitelbaum" />
+        <h3>Dr. Eric Teitelbaum</h3>
+        <p>Founder &amp; CTO<br><span style="font-size:.78rem;"><a href="https://ailresearch.com" target="_blank" rel="noopener" style="color:var(--blue);">AIL Research Inc.</a></span></p>
+      </div>
+      <div class="team-card">
+        <img src="photos/Andrew%20Lowenstein%20thermal%20image%20in%20the%20Coolest%20Spot%20pavilion.jpg" alt="Dr. Andy Lowenstein" />
+        <h3>Dr. Andy Lowenstein</h3>
+        <p>Founder &amp; CEO<br><span style="font-size:.78rem;"><a href="https://ailresearch.com" target="_blank" rel="noopener" style="color:var(--blue);">AIL Research Inc.</a></span></p>
+      </div>
+      <div class="team-card">
+        <img src="https://static.wixstatic.com/media/3f6285_7a39ca094f354a46b0d51421ce7b3df5~mv2.jpg/v1/fill/w_300,h_360,al_c,q_80/3f6285_7a39ca094f354a46b0d51421ce7b3df5~mv2.jpg" alt="Prof. Forrest Meggers" />
+        <h3>Prof. Forrest Meggers</h3>
+        <p>Founder &amp; Chief Scientist<br><span style="font-size:.78rem;"><a href="https://chaos.princeton.edu" target="_blank" rel="noopener" style="color:var(--blue);">Princeton CHAOS Lab</a></span></p>
+      </div>
+    </div>
+    <p style="text-align:center; margin-top:2rem; font-size:.88rem; color:var(--muted); max-width:620px; margin-left:auto; margin-right:auto;">Joint patents and new system developments are being actively pursued through the AIL Research–Princeton University collaboration, combining decades of applied engineering with cutting-edge academic research in building physics and thermal comfort.</p>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<div class="contact">
+  <h2>Get in Touch</h2>
+  <p>Questions about the technology, interested in a pilot, or want to explore collaboration or co-innovation? We'd love to hear from you.</p>
+  <a class="btn btn-amber" href="mailto:hello@clearly-cool.com">hello@clearly-cool.com</a>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <p>© 2026 Clearly Cool &nbsp;|&nbsp; <a href="mailto:hello@clearly-cool.com">hello@clearly-cool.com</a> &nbsp;|&nbsp; <a href="applications.html">All Applications</a></p>
+</footer>
+
+</body>
+</html>
