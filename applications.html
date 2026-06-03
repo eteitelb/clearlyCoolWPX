@@ -32,6 +32,8 @@
     .nav-links { display: flex; gap: 1.8rem; list-style: none; align-items: center; }
     .nav-links a { color: var(--navy); text-decoration: none; font-size: .95rem; font-weight: 500; transition: color .2s; }
     .nav-links a:hover, .nav-links a.active { color: var(--blue); }
+    .nav-links a.page-link { color: var(--blue-lt); }
+    .nav-links a.page-link:hover { color: var(--blue); }
     .nav-cta { background: var(--amber); color: var(--white); padding: .5rem 1.3rem; border-radius: 5px; font-weight: 700; font-size: .9rem; text-decoration: none; transition: background .2s; }
     .nav-cta:hover { background: #d4920a; }
     @media (max-width: 700px) { .nav-links { gap: .9rem; } .nav-links li.hide-sm { display: none; } }
@@ -107,10 +109,11 @@
   <ul class="nav-links">
     <li class="hide-sm"><a href="index.html#how-it-works">How It Works</a></li>
     <li class="hide-sm"><a href="index.html#product">Product</a></li>
+    <li class="hide-sm"><a href="index.html#partnerships">Sales/Partners</a></li>
     <li class="hide-sm"><a href="index.html#team">About</a></li>
-    <li class="hide-sm"><a href="index.html#partnerships">Partnerships</a></li>
-    <li><a href="applications.html" class="active">Applications</a></li>
-    <li><a href="coolswine.html">CoolSwine Tool</a></li>
+    <li><a class="page-link active" href="applications.html">Applications</a></li>
+    <li><a class="page-link" href="coolswine.html">Online Tool</a></li>
+    <li><a class="page-link" href="coolswine-sensors.html">Heat Sensors</a></li>
   </ul>
   <a class="nav-cta" href="mailto:hello@clearly-cool.com?subject=Application Inquiry">Contact Us</a>
 </nav>

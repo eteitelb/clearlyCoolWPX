@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>CoolSwine Sensors — Clearly Cool</title>
+  <meta name="description" content="CoolSwine Sensors: real-time swine heat stress monitoring — respiratory rate, core temperature, radiant temp, humidity, and air speed, integrated with Clearly Cool radiant cooling panels." />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --navy:    #0d1f3c;
+      --blue:    #1a7ab5;
+      --blue-lt: #3aaee0;
+      --ice:     #e8f5fc;
+      --text:    #1a1a2e;
+      --muted:   #556;
+      --white:   #ffffff;
+      --amber:   #f0a500;
+      --max:     1100px;
+    }
+    body { font-family: 'Segoe UI', system-ui, sans-serif; color: var(--text); line-height: 1.6; }
+
+    /* ── NAV ── */
+    nav {
+      position: sticky; top: 0; z-index: 100;
+      background: var(--white);
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0 2rem; height: 80px;
+      box-shadow: 0 2px 8px rgba(0,0,0,.08);
+    }
+    .nav-logo img { height: 52px; display: block; }
+    .nav-links { display: flex; gap: 1.8rem; list-style: none; align-items: center; }
+    .nav-links a { color: var(--navy); text-decoration: none; font-size: .95rem; font-weight: 500; transition: color .2s; }
+    .nav-links a:hover, .nav-links a.active { color: var(--blue); }
+    .nav-links a.page-link { color: var(--blue-lt); }
+    .nav-links a.page-link:hover { color: var(--blue); }
+    .nav-cta { background: var(--amber); color: var(--white); padding: .5rem 1.3rem; border-radius: 5px; font-weight: 700; font-size: .9rem; text-decoration: none; transition: background .2s; }
+    .nav-cta:hover { background: #d4920a; }
+    @media (max-width: 700px) { .nav-links { gap: .9rem; } .nav-links li.hide-sm { display: none; } }
+
+    /* ── PAGE HERO ── */
+    .hero {
+      position: relative; min-height: 70vh;
+      display: flex; align-items: center; justify-content: center;
+      background:
+        linear-gradient(to bottom, rgba(8,22,45,.65) 0%, rgba(8,22,45,.40) 50%, rgba(8,22,45,.75) 100%),
+        url('photos/Pork%20Expo%20pavilion.jpg') center/cover no-repeat;
+      text-align: center; color: var(--white); padding: 4rem 1.5rem;
+    }
+    .hero-eyebrow { display: inline-block; background: var(--blue); color: var(--white); font-size: .78rem; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; padding: .3rem 1rem; border-radius: 20px; margin-bottom: 1.2rem; }
+    .hero h1 { font-size: clamp(2rem, 5vw, 3.2rem); font-weight: 800; line-height: 1.12; margin-bottom: 1rem; }
+    .hero h1 em { color: #7fd4f5; font-style: normal; }
+    .hero p { font-size: clamp(1rem, 2vw, 1.15rem); max-width: 620px; margin: 0 auto 2rem; opacity: .92; }
+    .hero-btns { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
+    .btn { padding: .75rem 2rem; border-radius: 5px; font-weight: 700; text-decoration: none; font-size: 1rem; display: inline-block; transition: all .2s; }
+    .btn-amber { background: var(--amber); color: var(--white); }
+    .btn-amber:hover { background: #d4920a; }
+    .btn-outline-white { border: 2px solid rgba(255,255,255,.7); color: var(--white); }
+    .btn-outline-white:hover { border-color: var(--white); background: rgba(255,255,255,.1); }
+    .btn-blue { background: var(--blue); color: var(--white); }
+    .btn-blue:hover { background: #1565a0; }
+
+    /* ── SECTIONS ── */
+    section { padding: 5rem 1.5rem; }
+    .bg-ice { background: var(--ice); }
+    .bg-navy { background: var(--navy); color: var(--white); }
+    .container { max-width: var(--max); margin: 0 auto; }
+    .section-label { text-transform: uppercase; letter-spacing: .12em; font-size: .75rem; color: var(--blue-lt); font-weight: 700; margin-bottom: .5rem; }
+    h2 { font-size: clamp(1.6rem, 3vw, 2.2rem); font-weight: 800; color: var(--navy); margin-bottom: 1rem; }
+    .bg-navy h2 { color: var(--white); }
+    .lead { font-size: 1.05rem; color: var(--muted); max-width: 700px; margin-bottom: 2.5rem; }
+    .bg-navy .lead { color: rgba(255,255,255,.72); }
+
+    /* ── SPLIT ── */
+    .split { display: grid; grid-template-columns: 1fr 1fr; gap: 3.5rem; align-items: center; }
+    @media (max-width: 720px) { .split { grid-template-columns: 1fr; } }
+    .split img { width: 100%; border-radius: 10px; box-shadow: 0 4px 20px rgba(0,0,0,.14); }
+
+    /* ── METRICS GRID ── */
+    .metrics { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 1.2rem; margin: 2rem 0; }
+    .metric { background: rgba(255,255,255,.08); border: 1px solid rgba(255,255,255,.14); border-radius: 10px; padding: 1.2rem; text-align: center; }
+    .metric .val { font-size: 1.6rem; font-weight: 800; color: #7fd4f5; }
+    .metric .lbl { font-size: .78rem; color: rgba(255,255,255,.6); text-transform: uppercase; letter-spacing: .08em; margin-top: .2rem; }
+
+    /* ── FEATURE LIST ── */
+    .feature-list { list-style: none; margin-top: 1.5rem; }
+    .feature-list li { display: flex; gap: .75rem; align-items: flex-start; margin-bottom: .9rem; font-size: .95rem; color: var(--muted); }
+    .feature-list li::before { content: '✓'; color: var(--blue-lt); font-weight: 700; flex-shrink: 0; margin-top: .1rem; }
+
+    /* ── DASHBOARD SCREENSHOT ── */
+    .dashboard-wrap { border-radius: 12px; overflow: hidden; box-shadow: 0 6px 32px rgba(0,0,0,.22); }
+    .dashboard-wrap img { width: 100%; display: block; }
+
+    /* ── HOW IT CONNECTS ── */
+    .steps { list-style: none; margin-top: 1.5rem; }
+    .steps li { display: flex; gap: 1rem; margin-bottom: 1.4rem; align-items: flex-start; }
+    .step-num { flex-shrink: 0; width: 36px; height: 36px; border-radius: 50%; background: var(--blue); color: var(--white); font-weight: 800; font-size: .9rem; display: flex; align-items: center; justify-content: center; }
+    .step-text strong { display: block; color: var(--navy); margin-bottom: .15rem; }
+    .step-text span { font-size: .9rem; color: var(--muted); }
+
+    /* ── CTA ── */
+    .cta { background: var(--navy); color: var(--white); text-align: center; padding: 5rem 1.5rem; }
+    .cta h2 { color: var(--white); margin-bottom: 1rem; }
+    .cta p { opacity: .82; max-width: 520px; margin: 0 auto 2rem; }
+
+    /* ── FOOTER ── */
+    footer { background: #07111f; color: rgba(255,255,255,.45); text-align: center; padding: 1.4rem; font-size: .83rem; }
+    footer a { color: rgba(255,255,255,.55); text-decoration: none; }
+    footer a:hover { color: var(--white); }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a class="nav-logo" href="index.html">
+    <img src="photos/logo.png" alt="Clearly-cool.com" />
+  </a>
+  <ul class="nav-links">
+    <li class="hide-sm"><a href="index.html#how-it-works">How It Works</a></li>
+    <li class="hide-sm"><a href="index.html#product">Product</a></li>
+    <li class="hide-sm"><a href="index.html#partnerships">Sales/Partners</a></li>
+    <li class="hide-sm"><a href="index.html#team">About</a></li>
+    <li><a class="page-link" href="applications.html">Applications</a></li>
+    <li><a class="page-link" href="coolswine.html">Online Tool</a></li>
+    <li><a class="page-link active" href="coolswine-sensors.html">Heat Sensors</a></li>
+  </ul>
+  <a class="nav-cta" href="mailto:hello@clearly-cool.com?subject=CoolSwine Sensor Inquiry">Contact Us</a>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div>
+    <div class="hero-eyebrow">New · CoolSwine Sensor System</div>
+    <h1>Know When Your Pigs<br><em>Are Heat Stressed.</em></h1>
+    <p>Real-time respiratory rate, core temperature, and environmental sensing — mounted directly in the crate or stall. Close the loop between detecting heat stress and delivering targeted radiant cooling.</p>
+    <div class="hero-btns">
+      <a class="btn btn-amber" href="mailto:hello@clearly-cool.com?subject=CoolSwine Sensor Inquiry">Get Early Access</a>
+      <a class="btn btn-outline-white" href="#how-it-works">See How It Works</a>
+    </div>
+  </div>
+</section>
+
+<!-- WHAT IT MEASURES -->
+<section class="bg-ice">
+  <div class="container">
+    <div class="section-label">Live Monitoring</div>
+    <h2>Every Variable That Drives Heat Stress — In One System</h2>
+    <p class="lead">The CoolSwine sensor array captures the full thermal environment around each animal, not just ambient air temperature. This is the data producers have never had before.</p>
+    <ul class="feature-list">
+      <li>Respiratory rate (breaths per minute) — with Low / Normal / High classification</li>
+      <li>Core body temperature estimation</li>
+      <li>Air temperature</li>
+      <li>Relative humidity &amp; dew point</li>
+      <li>Radiant temperature</li>
+      <li>Air speed</li>
+    </ul>
+  </div>
+</section>
+
+<!-- SENSOR HARDWARE -->
+<section>
+  <div class="container">
+    <div class="split">
+      <div>
+        <div class="section-label">The Hardware</div>
+        <h2>A Sensor That Lives in the Barn</h2>
+        <p style="color:var(--muted); margin-bottom:1rem;">The CoolSwine sensor is a compact IoT device designed for agricultural environments. It mounts at animal level — where temperature actually matters — and streams live data to the monitoring dashboard.</p>
+        <ul class="feature-list">
+          <li>Non-contact respiratory rate detection — no animal contact required</li>
+          <li>Skin-surface and core temperature estimation</li>
+          <li>Integrated radiant temperature, air temp, humidity, and air speed sensors</li>
+          <li>Wireless connectivity — no barn wiring required</li>
+          <li>Rugged design for continuous barn operation</li>
+          <li>Visual status indicators (normal / elevated / high alert)</li>
+        </ul>
+      </div>
+      <img src="photos/CoolSwing%20sensor.jpg" alt="CoolSwine sensor prototype with IoT board mounted on pig cutout in barn panel" />
+    </div>
+  </div>
+</section>
+
+<!-- DASHBOARD -->
+<section class="bg-ice">
+  <div class="container">
+    <div class="split">
+      <div class="dashboard-wrap">
+        <img src="photos/Cool%20Swine%20Monitor.jpg" alt="CoolSwine Monitor dashboard showing respiratory rate, core temperature, and environmental readings" />
+      </div>
+      <div>
+        <div class="section-label">The Dashboard</div>
+        <h2>At-a-Glance Heat Stress Status for Every Animal</h2>
+        <p style="color:var(--muted); margin-bottom:1rem;">The CoolSwine Monitor displays live readings from every sensor in the barn. Respiratory rate is classified in real time as Low, Normal, or High — so stockpeople can act immediately rather than relying on visual observation alone.</p>
+        <ul class="feature-list">
+          <li>Live respiratory rate with Low / Normal / High zone classification</li>
+          <li>Core temperature trending — catch stress before it peaks</li>
+          <li>Full environmental context: radiant temp, humidity, dew point, air speed</li>
+          <li>Recent readings log for each sensor node</li>
+          <li>Accessible from any device — phone, tablet, or barn computer</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- HOW IT CONNECTS TO COOLING -->
+<section id="how-it-works">
+  <div class="container">
+    <div class="section-label">The Full System</div>
+    <h2>Sense It. Cool It. Close the Loop.</h2>
+    <p class="lead">CoolSwine Sensors are designed to work hand-in-hand with Clearly Cool radiant panels — giving producers both the data to understand heat stress and the hardware to eliminate it.</p>
+    <ul class="steps">
+      <li>
+        <div class="step-num">1</div>
+        <div class="step-text"><strong>Sensor Detects Stress</strong><span>Respiratory rate climbs above 40 bpm, core temp rises — the dashboard flags the animal in real time.</span></div>
+      </li>
+      <li>
+        <div class="step-num">2</div>
+        <div class="step-text"><strong>Stockperson Is Alerted</strong><span>Instant notification on phone or barn display. No guessing, no walking every row — you know exactly which crate needs attention.</span></div>
+      </li>
+      <li>
+        <div class="step-num">3</div>
+        <div class="step-text"><strong>Radiant Panel Engages</strong><span>The Clearly Cool panel above the flagged crate can be activated manually or automatically — providing immediate, targeted cooling to that animal only.</span></div>
+      </li>
+      <li>
+        <div class="step-num">4</div>
+        <div class="step-text"><strong>Recovery Is Confirmed</strong><span>The sensor confirms respiratory rate returning to normal range. No overcooling, no guesswork — closed-loop animal welfare in action.</span></div>
+      </li>
+    </ul>
+    <div style="margin-top: 2.5rem; display:flex; gap:1rem; flex-wrap:wrap;">
+      <a class="btn btn-blue" href="coolswine.html">Try the CoolSwine Heat Stress Tool →</a>
+      <a class="btn btn-amber" href="mailto:hello@clearly-cool.com?subject=CoolSwine Sensor Inquiry">Inquire About Sensors</a>
+    </div>
+  </div>
+</section>
+
+<!-- INNOVATION PARTNER -->
+<section class="bg-ice">
+  <div class="container" style="text-align:center;">
+    <div class="section-label">Innovation Partner</div>
+    <h2>Sensor Technology by CHAOSense</h2>
+    <p style="color:var(--muted); max-width:580px; margin: 0 auto 1.5rem;">The CoolSwine sensor system is developed in partnership with <a href="https://chaosense.com" target="_blank" rel="noopener" style="color:var(--blue); font-weight:600;">CHAOSense</a> — an innovation partner specializing in environmental and physiological sensing for built and agricultural environments.</p>
+    <a class="btn btn-blue" href="https://chaosense.com" target="_blank" rel="noopener">Visit CHAOSense.com →</a>
+  </div>
+</section>
+
+<!-- CTA -->
+<div class="cta">
+  <h2>Get in Touch</h2>
+  <p>CoolSwine Sensors are in active development. Reach out to learn about early access, pilot programs, or integration with your existing barn management system.</p>
+  <a class="btn btn-amber" href="mailto:hello@clearly-cool.com?subject=CoolSwine Sensor Inquiry">hello@clearly-cool.com</a>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <p>© 2026 Clearly Cool &nbsp;|&nbsp; <a href="mailto:hello@clearly-cool.com">hello@clearly-cool.com</a> &nbsp;|&nbsp; <a href="index.html">Home</a> &nbsp;|&nbsp; <a href="applications.html">Applications</a> &nbsp;|&nbsp; <a href="coolswine.html">CoolSwine Tool</a></p>
+</footer>
+
+</body>
+</html>
