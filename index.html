@@ -4,687 +4,1110 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Clearly Cool — A Proven Alternative to Air Conditioning</title>
-  <meta name="description" content="Clearly Cool radiant cooling panels cool people, not buildings. 85W, no plumbing, proven across outdoor dining, agriculture, transit, and sports." />
+  <meta name="description" content="Clearly Cool radiant cooling panels cool people and animals, not whole buildings. 85W, no plumbing, proven across outdoor dining, agriculture, transit, and sports." />
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,800;1,700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&family=Source+Serif+4:ital,wght@0,400;0,600;1,400;1,600&display=swap" rel="stylesheet">
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     :root {
-      --teal:    #00C4CC;
-      --teal-dk: #008f96;
-      --white:   #ffffff;
-      --off:     #f4f8f8;
-      --ink:     #0d1a1b;
-      --muted:   rgba(255,255,255,.68);
-      --max:     1100px;
+      --green:    #1a6b5c;
+      --green-dk: #124d42;
+      --green-lt: #e8f4f1;
+      --green-mid:#2a8a74;
+      --amber:    #e07b2a;
+      --white:    #ffffff;
+      --gray-50:  #f8faf9;
+      --gray-100: #eef1ef;
+      --gray-400: #8a9490;
+      --gray-700: #3d4742;
+      --ink:      #1c2520;
+      --max:      1140px;
+      --radius:   6px;
     }
-
     html { scroll-behavior: smooth; }
-    body { font-family: 'Inter', system-ui, sans-serif; color: var(--ink); line-height: 1.65; background: var(--ink); }
+    body {
+      font-family: 'Montserrat', system-ui, sans-serif;
+      color: var(--ink); line-height: 1.65;
+      background: var(--white);
+    }
 
     /* ── NAV ── */
     nav {
-      position: fixed; top: 0; left: 0; right: 0; z-index: 200;
+      position: sticky; top: 0; z-index: 200;
+      background: var(--white);
+      border-bottom: 2px solid var(--green);
       display: flex; align-items: center; justify-content: space-between;
-      padding: 0 2.5rem; height: 72px;
-      background: rgba(13,26,27,0.72);
-      backdrop-filter: blur(12px);
-      -webkit-backdrop-filter: blur(12px);
-      border-bottom: 1px solid rgba(0,196,204,.15);
-      transition: background .3s;
+      padding: 0 2.5rem; height: 76px;
+      box-shadow: 0 2px 12px rgba(0,0,0,.07);
     }
-    nav.scrolled { background: rgba(13,26,27,0.96); }
-    .nav-logo img { height: 44px; display: block; }
-    .nav-links { display: flex; gap: 2rem; list-style: none; align-items: center; }
+    .nav-logo img { height: 46px; display: block; }
+    .nav-links { display: flex; gap: 0; list-style: none; align-items: stretch; height: 76px; }
+    .nav-links li { display: flex; align-items: center; }
     .nav-links a {
-      color: rgba(255,255,255,.78); text-decoration: none; font-size: .88rem;
-      font-weight: 500; letter-spacing: .02em; transition: color .2s;
+      color: var(--gray-700); text-decoration: none;
+      font-size: .82rem; font-weight: 600; letter-spacing: .04em;
+      text-transform: uppercase; padding: 0 1.1rem;
+      display: flex; align-items: center; height: 100%;
+      border-bottom: 3px solid transparent;
+      transition: color .15s, border-color .15s;
     }
-    .nav-links a:hover, .nav-links a.active { color: var(--teal); }
+    .nav-links a:hover { color: var(--green); border-bottom-color: var(--green); }
+    .nav-links a.ext::after { content: ' ↗'; font-size: .75em; }
     .nav-cta {
-      background: transparent; border: 1.5px solid var(--teal);
-      color: var(--teal); padding: .45rem 1.3rem; border-radius: 3px;
-      font-weight: 600; font-size: .85rem; text-decoration: none;
-      transition: all .2s; white-space: nowrap; letter-spacing: .03em;
+      background: var(--green); color: var(--white);
+      padding: .55rem 1.4rem; border-radius: var(--radius);
+      font-weight: 700; font-size: .82rem; text-decoration: none;
+      letter-spacing: .04em; text-transform: uppercase;
+      transition: background .15s; white-space: nowrap; margin-left: .5rem;
     }
-    .nav-cta:hover { background: var(--teal); color: var(--ink); }
+    .nav-cta:hover { background: var(--green-dk); }
 
     /* hamburger */
     .nav-hamburger {
       display: none; flex-direction: column; justify-content: space-between;
-      width: 26px; height: 18px; cursor: pointer; background: none;
-      border: none; padding: 0;
+      width: 26px; height: 18px; cursor: pointer; background: none; border: none; padding: 0;
     }
-    .nav-hamburger span { display: block; height: 2px; background: var(--white); border-radius: 2px; transition: all .25s; }
+    .nav-hamburger span { display: block; height: 2px; background: var(--ink); border-radius: 2px; transition: all .25s; }
     .nav-hamburger.open span:nth-child(1) { transform: translateY(8px) rotate(45deg); }
     .nav-hamburger.open span:nth-child(2) { opacity: 0; }
     .nav-hamburger.open span:nth-child(3) { transform: translateY(-8px) rotate(-45deg); }
     .nav-drawer {
-      display: none; position: fixed; top: 72px; left: 0; right: 0; bottom: 0;
-      background: rgba(13,26,27,.97); z-index: 199;
-      flex-direction: column; padding: 2rem 2rem;
+      display: none; position: fixed; top: 76px; left: 0; right: 0;
+      background: var(--white); z-index: 199;
+      border-top: 2px solid var(--green);
+      box-shadow: 0 8px 24px rgba(0,0,0,.12);
+      flex-direction: column; padding: 1.2rem 1.5rem 2rem;
     }
     .nav-drawer.open { display: flex; }
     .nav-drawer a {
-      color: rgba(255,255,255,.82); text-decoration: none; font-size: 1.15rem;
-      font-weight: 400; padding: 1rem 0; border-bottom: 1px solid rgba(255,255,255,.08);
+      color: var(--gray-700); text-decoration: none;
+      font-size: .9rem; font-weight: 600; text-transform: uppercase;
+      letter-spacing: .04em; padding: .9rem 0;
+      border-bottom: 1px solid var(--gray-100); display: block;
     }
     .nav-drawer a:last-child { border-bottom: none; }
-    .nav-drawer a:hover { color: var(--teal); }
-    .nav-drawer .drawer-cta { margin-top: 1.5rem; color: var(--teal) !important; font-weight: 600; border-bottom: none !important; }
+    .nav-drawer a:hover { color: var(--green); }
+    .nav-drawer .dcta { color: var(--green) !important; border-bottom: none !important; margin-top: .5rem; }
 
-    @media (max-width: 760px) {
+    @media (max-width: 860px) {
       .nav-links { display: none; }
       .nav-cta { display: none; }
       .nav-hamburger { display: flex; }
       nav { padding: 0 1.2rem; }
     }
 
-    /* ── FULL-BLEED SECTION BASE ── */
-    .scene {
-      position: relative;
-      min-height: 100vh;
-      display: flex; align-items: center; justify-content: center;
-      overflow: hidden;
+    /* ── HERO SLIDESHOW ── */
+    .hero {
+      position: relative; overflow: hidden;
+      height: 82vh; min-height: 500px; max-height: 820px;
     }
-    .scene-bg {
+    .slide {
       position: absolute; inset: 0;
       background-size: cover; background-position: center;
-      background-repeat: no-repeat;
-      transform: scale(1.04);
-      transition: transform 12s ease-out;
+      opacity: 0; transition: opacity 1s ease-in-out;
     }
-    .scene:hover .scene-bg { transform: scale(1.0); }
-    .scene-overlay {
-      position: absolute; inset: 0;
+    .slide.active { opacity: 1; }
+    .slide::after {
+      content: ''; position: absolute; inset: 0;
+      background: linear-gradient(to bottom, rgba(15,35,28,.38) 0%, rgba(15,35,28,.65) 100%);
     }
-    .scene-content {
-      position: relative; z-index: 2;
-      max-width: var(--max); width: 100%; padding: 8rem 2.5rem 5rem;
+    .hero-content {
+      position: absolute; inset: 0; z-index: 2;
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
+      text-align: center; padding: 2rem 2rem 5rem;
     }
-
-    /* ── HERO ── */
-    .hero .scene-bg {
-      background-image: url('photos/Clealry-cool\ demonstration\ pavilion\ hero\ shot\ with\ lable.jpg');
-      background-position: center 30%;
+    .hero-content h1 {
+      font-family: 'Source Serif 4', Georgia, serif;
+      font-size: clamp(1.9rem, 4.5vw, 3.6rem);
+      font-weight: 600; color: var(--white);
+      line-height: 1.18; max-width: 800px;
+      margin-bottom: 1.5rem;
+      text-shadow: 0 2px 12px rgba(0,0,0,.3);
     }
-    .hero .scene-overlay {
-      background: linear-gradient(135deg, rgba(13,26,27,.82) 0%, rgba(0,80,85,.45) 60%, rgba(13,26,27,.75) 100%);
-    }
-    .hero .scene-content { text-align: left; max-width: 780px; }
-
-    .eyebrow {
-      display: inline-block;
-      font-size: .72rem; font-weight: 600; letter-spacing: .18em;
-      text-transform: uppercase; color: var(--teal);
-      margin-bottom: 1.4rem;
-    }
-    .hero h1 {
-      font-family: 'Playfair Display', Georgia, serif;
-      font-size: clamp(2.6rem, 6vw, 4.8rem);
-      font-weight: 800; line-height: 1.06;
-      color: var(--white); margin-bottom: 1.6rem;
-    }
-    .hero h1 em { font-style: italic; color: var(--teal); }
+    .hero-content h1 em { font-style: italic; color: #7ee8d8; }
     .hero-sub {
-      font-size: clamp(1rem, 1.8vw, 1.2rem); color: var(--muted);
-      max-width: 560px; margin-bottom: 2.8rem; font-weight: 300; line-height: 1.7;
+      font-size: clamp(.95rem, 1.5vw, 1.15rem);
+      color: rgba(255,255,255,.88); max-width: 600px;
+      margin-bottom: 2.2rem; font-weight: 400; line-height: 1.7;
+      text-shadow: 0 1px 6px rgba(0,0,0,.3);
     }
-    .hero-btns { display: flex; gap: 1rem; flex-wrap: wrap; }
-
+    .hero-btns { display: flex; gap: 1rem; flex-wrap: wrap; justify-content: center; }
     .btn {
-      padding: .8rem 2.2rem; border-radius: 3px; font-weight: 600;
-      text-decoration: none; font-size: .9rem; display: inline-block;
-      transition: all .2s; letter-spacing: .02em;
+      padding: .75rem 2rem; border-radius: var(--radius);
+      font-weight: 700; font-size: .85rem; text-decoration: none;
+      text-transform: uppercase; letter-spacing: .05em;
+      display: inline-block; transition: all .18s;
     }
-    .btn-teal { background: var(--teal); color: var(--ink); }
-    .btn-teal:hover { background: #00dde6; }
-    .btn-ghost { border: 1.5px solid rgba(255,255,255,.5); color: var(--white); }
-    .btn-ghost:hover { border-color: var(--white); background: rgba(255,255,255,.08); }
+    .btn-green { background: var(--green); color: var(--white); }
+    .btn-green:hover { background: var(--green-dk); }
+    .btn-white { background: var(--white); color: var(--green); }
+    .btn-white:hover { background: #e8f4f1; }
+    .btn-outline { border: 2px solid var(--white); color: var(--white); }
+    .btn-outline:hover { background: rgba(255,255,255,.12); }
+    .btn-amber { background: var(--amber); color: var(--white); }
+    .btn-amber:hover { background: #c96b1c; }
 
-    /* ── TAGLINE STRIP ── */
-    .tagline-strip {
-      background: var(--teal);
-      padding: 2rem 2rem;
+    /* slide dots */
+    .slide-dots {
+      position: absolute; bottom: 1.4rem; left: 50%; transform: translateX(-50%);
+      z-index: 3; display: flex; gap: .5rem;
+    }
+    .slide-dot {
+      width: 10px; height: 10px; border-radius: 50%;
+      background: rgba(255,255,255,.4); border: none; cursor: pointer;
+      padding: 0; transition: background .2s;
+    }
+    .slide-dot.active { background: var(--white); }
+
+    /* ── GREEN MISSION BAND ── */
+    .mission-band {
+      background: var(--green);
+      padding: 1.6rem 2rem;
       text-align: center;
     }
-    .tagline-strip p {
-      font-family: 'Playfair Display', serif;
-      font-size: clamp(1.2rem, 2.5vw, 1.8rem);
-      font-style: italic; color: var(--ink);
-      font-weight: 700; letter-spacing: .01em;
+    .mission-band p {
+      font-family: 'Source Serif 4', serif;
+      font-size: clamp(1rem, 2vw, 1.35rem);
+      font-style: italic; color: var(--white);
+      font-weight: 400; max-width: 760px; margin: 0 auto;
     }
 
-    /* ── PROOF STATS ── */
-    .proof-bar {
-      background: var(--ink);
-      border-bottom: 1px solid rgba(0,196,204,.15);
-      padding: 3rem 2rem;
+    /* ── QUICK LINKS ROW ── */
+    .quicklinks {
+      background: var(--gray-50);
+      border-bottom: 1px solid var(--gray-100);
+      padding: 2.5rem 2rem;
     }
-    .proof-grid {
-      display: flex; flex-wrap: wrap; justify-content: center;
-      gap: 3rem 4rem; max-width: var(--max); margin: 0 auto;
+    .quicklinks-grid {
+      max-width: var(--max); margin: 0 auto;
+      display: grid; grid-template-columns: repeat(3, 1fr);
+      gap: 1.2rem;
     }
-    .proof-stat { text-align: center; }
-    .proof-num {
-      font-family: 'Playfair Display', serif;
-      font-size: 3rem; font-weight: 700; color: var(--teal); line-height: 1;
-      margin-bottom: .3rem;
+    @media (max-width: 640px) { .quicklinks-grid { grid-template-columns: 1fr; } }
+    .ql-card {
+      background: var(--white); border: 1px solid var(--gray-100);
+      border-radius: var(--radius); padding: 1.6rem 1.5rem;
+      text-decoration: none; display: flex; align-items: flex-start; gap: 1rem;
+      transition: box-shadow .18s, border-color .18s;
     }
-    .proof-label { font-size: .8rem; color: rgba(255,255,255,.55); letter-spacing: .06em; text-transform: uppercase; }
+    .ql-card:hover { box-shadow: 0 4px 16px rgba(26,107,92,.12); border-color: var(--green); }
+    .ql-icon { font-size: 1.8rem; flex-shrink: 0; line-height: 1; }
+    .ql-text-label {
+      font-size: .7rem; font-weight: 700; letter-spacing: .1em;
+      text-transform: uppercase; color: var(--green); margin-bottom: .2rem;
+    }
+    .ql-text-title { font-size: .97rem; font-weight: 700; color: var(--ink); margin-bottom: .2rem; }
+    .ql-text-desc { font-size: .82rem; color: var(--gray-400); line-height: 1.5; }
 
-    /* ── THERMAL IMAGE SECTION ── */
-    .thermal-scene {
-      position: relative; min-height: 90vh;
-      display: flex; align-items: center; overflow: hidden;
+    /* ── WHAT WE DO ── */
+    .what-section { padding: 6rem 2rem; background: var(--white); }
+    .what-inner { max-width: var(--max); margin: 0 auto; }
+    .section-eyebrow {
+      font-size: .7rem; font-weight: 700; letter-spacing: .14em;
+      text-transform: uppercase; color: var(--green); margin-bottom: .6rem;
     }
-    .thermal-scene .scene-bg {
-      background-image: url('photos/FLIR4762.jpg');
-      background-size: cover; background-position: center;
-      position: absolute; inset: 0; transform: scale(1.02);
+    .section-title {
+      font-family: 'Source Serif 4', serif;
+      font-size: clamp(1.7rem, 3vw, 2.4rem);
+      font-weight: 600; color: var(--ink);
+      margin-bottom: 1rem; line-height: 1.2;
     }
-    .thermal-scene .scene-overlay {
-      position: absolute; inset: 0;
-      background: linear-gradient(to right, rgba(13,26,27,.92) 40%, rgba(13,26,27,.2) 100%);
+    .section-sub {
+      font-size: 1rem; color: var(--gray-400);
+      max-width: 640px; margin-bottom: 3rem; line-height: 1.7;
     }
-    .thermal-content {
-      position: relative; z-index: 2;
-      max-width: var(--max); width: 100%; padding: 5rem 2.5rem;
+    .section-sub a { color: var(--green); text-decoration: none; font-weight: 600; }
+    .section-sub a:hover { text-decoration: underline; }
+
+    .what-grid {
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 4rem; align-items: center;
     }
-    .thermal-content .eyebrow { margin-bottom: 1rem; }
-    .thermal-content h2 {
-      font-family: 'Playfair Display', serif;
-      font-size: clamp(2rem, 4vw, 3.4rem); font-weight: 800;
-      color: var(--white); line-height: 1.1; margin-bottom: 1.2rem;
-      max-width: 520px;
+    @media (max-width: 720px) { .what-grid { grid-template-columns: 1fr; gap: 2.5rem; } }
+    .what-img img {
+      width: 100%; border-radius: var(--radius);
+      box-shadow: 0 6px 30px rgba(0,0,0,.13); display: block;
     }
-    .thermal-content h2 em { font-style: italic; color: var(--teal); }
-    .thermal-body {
-      font-size: 1rem; color: var(--muted); max-width: 480px;
-      margin-bottom: 2rem; line-height: 1.75; font-weight: 300;
+    .what-text .section-sub { margin-bottom: 1.8rem; }
+    .what-caption {
+      font-size: .78rem; color: var(--gray-400); font-style: italic;
+      margin-top: .6rem; line-height: 1.5;
     }
-    .thermal-footnote {
-      font-size: .78rem; color: rgba(255,255,255,.35); max-width: 440px;
+
+    /* ── STATS ── */
+    .stats-section { background: var(--green-lt); padding: 5rem 2rem; }
+    .stats-inner { max-width: var(--max); margin: 0 auto; }
+    .stats-header { margin-bottom: 3rem; }
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 1.5rem;
+    }
+    .stat-card {
+      background: var(--white); border-radius: var(--radius);
+      padding: 2rem 1.5rem; text-align: center;
+      box-shadow: 0 2px 10px rgba(26,107,92,.08);
+      border-top: 3px solid var(--green);
+    }
+    .stat-num {
+      font-family: 'Source Serif 4', serif;
+      font-size: 3rem; font-weight: 600; color: var(--green);
+      line-height: 1; margin-bottom: .4rem;
+    }
+    .stat-label {
+      font-size: .82rem; color: var(--gray-700);
+      font-weight: 600; line-height: 1.4; text-transform: uppercase;
+      letter-spacing: .05em;
+    }
+    .stat-detail { font-size: .78rem; color: var(--gray-400); margin-top: .35rem; line-height: 1.5; }
+
+    /* ── THERMAL / PROOF SECTION ── */
+    .proof-section { padding: 6rem 2rem; background: var(--white); }
+    .proof-inner {
+      max-width: var(--max); margin: 0 auto;
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 4rem; align-items: center;
+    }
+    @media (max-width: 720px) { .proof-inner { grid-template-columns: 1fr; gap: 2.5rem; } }
+    .proof-img {
+      position: relative; border-radius: var(--radius); overflow: hidden;
+      box-shadow: 0 6px 30px rgba(0,0,0,.15);
+    }
+    .proof-img img { width: 100%; display: block; }
+    .proof-img-label {
+      position: absolute; bottom: 0; left: 0; right: 0;
+      background: rgba(26,107,92,.88);
+      color: var(--white); font-size: .75rem; padding: .7rem 1rem;
       font-style: italic;
     }
-
-    /* ── HOW IT WORKS — alternating text/image ── */
-    .how-section { background: var(--ink); padding: 7rem 2rem; }
-    .how-inner { max-width: var(--max); margin: 0 auto; }
-    .how-header { text-align: center; margin-bottom: 5rem; }
-    .how-header h2 {
-      font-family: 'Playfair Display', serif;
-      font-size: clamp(2rem, 3.5vw, 2.8rem); color: var(--white); font-weight: 700;
+    .proof-text .section-sub { margin-bottom: 1.8rem; }
+    .proof-link {
+      display: inline-flex; align-items: center; gap: .4rem;
+      color: var(--green); text-decoration: none; font-weight: 700;
+      font-size: .85rem; text-transform: uppercase; letter-spacing: .06em;
+      border-bottom: 2px solid var(--green-lt); padding-bottom: .1rem;
+      transition: border-color .15s;
     }
-    .how-header p { color: rgba(255,255,255,.55); max-width: 540px; margin: 1rem auto 0; font-size: 1rem; }
-    .how-row {
-      display: grid; grid-template-columns: 1fr 1fr;
-      gap: 4rem; align-items: center; margin-bottom: 5rem;
-    }
-    .how-row:last-child { margin-bottom: 0; }
-    .how-row.flip .how-text { order: 2; }
-    .how-row.flip .how-img-wrap { order: 1; }
-    @media (max-width: 720px) {
-      .how-row { grid-template-columns: 1fr; gap: 2rem; }
-      .how-row.flip .how-text { order: 1; }
-      .how-row.flip .how-img-wrap { order: 2; }
-    }
-    .how-text .eyebrow { color: var(--teal); margin-bottom: .8rem; }
-    .how-text h3 {
-      font-family: 'Playfair Display', serif;
-      font-size: clamp(1.5rem, 2.5vw, 2rem); color: var(--white);
-      font-weight: 700; margin-bottom: 1rem; line-height: 1.2;
-    }
-    .how-text p { color: rgba(255,255,255,.62); font-size: .97rem; line-height: 1.75; font-weight: 300; }
-    .how-text a { color: var(--teal); text-decoration: none; font-weight: 500; }
-    .how-text a:hover { text-decoration: underline; }
-    .how-img-wrap img {
-      width: 100%; display: block;
-      border-radius: 4px;
-      box-shadow: 0 8px 40px rgba(0,0,0,.5);
-    }
+    .proof-link:hover { border-color: var(--green); }
 
     /* ── APPLICATIONS ── */
-    .apps-scene {
-      position: relative; min-height: 80vh;
-      display: flex; align-items: center; overflow: hidden;
+    .apps-section { padding: 6rem 2rem; background: var(--gray-50); }
+    .apps-inner { max-width: var(--max); margin: 0 auto; }
+    .apps-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(310px, 1fr));
+      gap: 1.6rem; margin-top: 3rem;
     }
-    .apps-scene .scene-bg {
-      background-image: url('photos/Outdoor\ dining\ Gemini\ conceptualization.png');
-      background-size: cover; background-position: center top;
-      position: absolute; inset: 0;
+    .app-card {
+      background: var(--white); border-radius: var(--radius);
+      overflow: hidden; box-shadow: 0 2px 12px rgba(0,0,0,.07);
+      display: flex; flex-direction: column;
+      transition: box-shadow .18s, transform .18s;
     }
-    .apps-scene .scene-overlay {
-      position: absolute; inset: 0;
-      background: linear-gradient(to bottom, rgba(13,26,27,.6) 0%, rgba(13,26,27,.88) 100%);
-    }
-    .apps-content {
-      position: relative; z-index: 2;
-      max-width: var(--max); width: 100%; padding: 5rem 2.5rem;
-      text-align: center;
-    }
-    .apps-content h2 {
-      font-family: 'Playfair Display', serif;
-      font-size: clamp(2rem, 4vw, 3rem); color: var(--white); font-weight: 700;
-      margin-bottom: 1rem;
-    }
-    .apps-content p { color: var(--muted); max-width: 580px; margin: 0 auto 3rem; font-size: 1rem; font-weight: 300; }
-    .apps-tiles {
-      display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-      gap: 1.2rem; margin-bottom: 2.5rem;
-    }
-    .app-tile {
-      background: rgba(255,255,255,.07);
-      border: 1px solid rgba(0,196,204,.2);
-      border-radius: 4px; padding: 1.5rem 1.2rem;
-      text-align: center; transition: background .2s, border-color .2s;
-      text-decoration: none;
-    }
-    .app-tile:hover { background: rgba(0,196,204,.12); border-color: var(--teal); }
-    .app-tile-icon { font-size: 1.8rem; margin-bottom: .6rem; }
-    .app-tile-name { font-size: .88rem; font-weight: 600; color: var(--white); letter-spacing: .04em; }
-    .app-tile-detail { font-size: .78rem; color: rgba(255,255,255,.5); margin-top: .3rem; }
+    .app-card:hover { box-shadow: 0 8px 28px rgba(26,107,92,.14); transform: translateY(-3px); }
+    .app-card img { width: 100%; height: 220px; object-fit: cover; display: block; }
+    .app-card-body { padding: 1.4rem 1.5rem; flex: 1; display: flex; flex-direction: column; }
+    .app-card-body h3 { font-size: 1rem; font-weight: 700; color: var(--ink); margin-bottom: .5rem; }
+    .app-card-body p { font-size: .88rem; color: var(--gray-400); line-height: 1.6; flex: 1; }
+    .apps-footer { text-align: center; margin-top: 2.5rem; }
 
     /* ── SCIENCE & PRESS ── */
-    .science-section { background: #0a1516; padding: 7rem 2rem; }
+    .science-section { padding: 6rem 2rem; background: var(--green); }
     .science-inner { max-width: var(--max); margin: 0 auto; }
-    .science-header { margin-bottom: 4rem; }
-    .science-header h2 {
-      font-family: 'Playfair Display', serif;
-      font-size: clamp(1.8rem, 3vw, 2.6rem); color: var(--white); font-weight: 700; margin-bottom: .75rem;
+    .science-section .section-eyebrow { color: rgba(255,255,255,.6); }
+    .science-section .section-title { color: var(--white); }
+    .science-section .section-sub { color: rgba(255,255,255,.75); }
+    .science-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1.4rem; margin-top: 3rem;
     }
-    .science-header p { color: rgba(255,255,255,.5); max-width: 540px; font-size: .97rem; }
-    .science-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem; }
     .science-card {
-      border: 1px solid rgba(0,196,204,.15);
-      border-radius: 4px; padding: 1.6rem;
-      transition: border-color .2s;
+      background: rgba(255,255,255,.1); border: 1px solid rgba(255,255,255,.15);
+      border-radius: var(--radius); padding: 1.6rem;
+      transition: background .18s;
     }
-    .science-card:hover { border-color: rgba(0,196,204,.5); }
-    .science-card-label { font-size: .7rem; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: var(--teal); margin-bottom: .7rem; }
-    .science-card h3 { font-size: .97rem; color: var(--white); margin-bottom: .5rem; font-weight: 500; line-height: 1.4; }
-    .science-card p { font-size: .85rem; color: rgba(255,255,255,.48); line-height: 1.6; margin-bottom: .9rem; }
-    .science-card a { font-size: .82rem; font-weight: 600; color: var(--teal); text-decoration: none; }
+    .science-card:hover { background: rgba(255,255,255,.16); }
+    .science-card-tag {
+      font-size: .68rem; font-weight: 700; letter-spacing: .1em;
+      text-transform: uppercase; color: #7ee8d8; margin-bottom: .6rem;
+    }
+    .science-card h3 { font-size: .97rem; color: var(--white); font-weight: 600; margin-bottom: .5rem; line-height: 1.4; }
+    .science-card p { font-size: .85rem; color: rgba(255,255,255,.6); line-height: 1.6; margin-bottom: 1rem; }
+    .science-card a { font-size: .82rem; font-weight: 700; color: #7ee8d8; text-decoration: none; text-transform: uppercase; letter-spacing: .05em; }
     .science-card a:hover { text-decoration: underline; }
 
     /* ── TEAM ── */
-    .team-section {
-      position: relative; min-height: 60vh;
-      display: flex; align-items: center; overflow: hidden;
-      padding: 7rem 2rem;
-      background: var(--ink);
-    }
-    .team-inner { max-width: var(--max); margin: 0 auto; width: 100%; }
-    .team-header { text-align: center; margin-bottom: 3.5rem; }
-    .team-header h2 {
-      font-family: 'Playfair Display', serif;
-      font-size: clamp(1.8rem, 3vw, 2.6rem); color: var(--white); font-weight: 700;
-    }
-    .team-header p { color: rgba(255,255,255,.5); max-width: 580px; margin: .75rem auto 0; font-size: .97rem; }
-    .team-header a { color: var(--teal); text-decoration: none; }
-    .team-grid { display: flex; flex-wrap: wrap; gap: 2.5rem; justify-content: center; }
-    .team-card { text-align: center; max-width: 180px; }
+    .team-section { padding: 6rem 2rem; background: var(--white); }
+    .team-inner { max-width: var(--max); margin: 0 auto; }
+    .team-grid { display: flex; flex-wrap: wrap; gap: 2.5rem; justify-content: center; margin-top: 3rem; }
+    .team-card { text-align: center; max-width: 200px; }
     .team-card img {
-      width: 120px; height: 120px; object-fit: cover;
-      border-radius: 50%; border: 2px solid rgba(0,196,204,.3);
-      margin-bottom: .9rem; display: block; margin-left: auto; margin-right: auto;
+      width: 130px; height: 130px; object-fit: cover;
+      border-radius: 50%; display: block; margin: 0 auto .9rem;
+      border: 3px solid var(--green-lt);
+      box-shadow: 0 3px 14px rgba(26,107,92,.15);
     }
-    .team-card h3 { font-size: .92rem; color: var(--white); font-weight: 600; margin-bottom: .25rem; }
-    .team-card p { font-size: .78rem; color: rgba(255,255,255,.45); line-height: 1.5; }
-    .team-card a { color: var(--teal); text-decoration: none; font-size: .78rem; }
+    .team-card h3 { font-size: .95rem; font-weight: 700; color: var(--ink); margin-bottom: .25rem; }
+    .team-card .role { font-size: .8rem; color: var(--gray-400); line-height: 1.5; }
+    .team-card a { color: var(--green); text-decoration: none; font-weight: 600; font-size: .8rem; }
+    .team-blurb {
+      text-align: center; max-width: 640px; margin: 2.5rem auto 0;
+      font-size: .9rem; color: var(--gray-400); line-height: 1.7;
+    }
+    .team-blurb a { color: var(--green); text-decoration: none; font-weight: 600; }
 
-    /* ── CONTACT ── */
-    .contact-section {
-      position: relative; overflow: hidden;
+    /* ── CONTACT CTA ── */
+    .cta-section {
+      background: var(--gray-50); padding: 5.5rem 2rem;
+      text-align: center; border-top: 1px solid var(--gray-100);
     }
-    .contact-section .scene-bg {
-      background-image: url('photos/Patio\ cooling\ Gemini\ conceptualization.png');
-      background-size: cover; background-position: center;
-      position: absolute; inset: 0;
-    }
-    .contact-section .scene-overlay {
-      position: absolute; inset: 0;
-      background: rgba(13,26,27,.88);
-    }
-    .contact-content {
-      position: relative; z-index: 2;
-      text-align: center; padding: 7rem 2rem;
-    }
-    .contact-content h2 {
-      font-family: 'Playfair Display', serif;
-      font-size: clamp(1.8rem, 3.5vw, 2.8rem); color: var(--white);
-      font-weight: 700; margin-bottom: 1rem;
-    }
-    .contact-content p { color: var(--muted); max-width: 480px; margin: 0 auto 2.5rem; font-size: 1rem; font-weight: 300; }
+    .cta-section .section-title { margin-bottom: .8rem; }
+    .cta-section .section-sub { margin: 0 auto 2.2rem; }
 
     /* ── FOOTER ── */
     footer {
-      background: #060f10; border-top: 1px solid rgba(0,196,204,.1);
-      color: rgba(255,255,255,.35); text-align: center;
-      padding: 1.8rem; font-size: .8rem;
+      background: var(--green-dk); color: rgba(255,255,255,.6);
+      padding: 3rem 2rem 2rem;
     }
-    footer a { color: rgba(255,255,255,.4); text-decoration: none; }
-    footer a:hover { color: var(--teal); }
+    .footer-inner {
+      max-width: var(--max); margin: 0 auto;
+      display: grid; grid-template-columns: 2fr 1fr 1fr;
+      gap: 3rem;
+    }
+    @media (max-width: 640px) { .footer-inner { grid-template-columns: 1fr; gap: 2rem; } }
+    .footer-brand img { height: 40px; filter: brightness(0) invert(1); opacity: .85; margin-bottom: 1rem; }
+    .footer-brand p { font-size: .82rem; line-height: 1.7; max-width: 300px; }
+    .footer-brand a { color: rgba(255,255,255,.55); text-decoration: none; font-size: .82rem; }
+    .footer-col h4 {
+      font-size: .72rem; font-weight: 700; letter-spacing: .1em;
+      text-transform: uppercase; color: rgba(255,255,255,.35);
+      margin-bottom: 1rem;
+    }
+    .footer-col ul { list-style: none; }
+    .footer-col ul li { margin-bottom: .5rem; }
+    .footer-col ul li a { color: rgba(255,255,255,.65); text-decoration: none; font-size: .85rem; transition: color .15s; }
+    .footer-col ul li a:hover { color: var(--white); }
+    .footer-bottom {
+      max-width: var(--max); margin: 2.5rem auto 0;
+      padding-top: 1.5rem; border-top: 1px solid rgba(255,255,255,.1);
+      display: flex; justify-content: space-between; align-items: center;
+      flex-wrap: wrap; gap: 1rem; font-size: .78rem;
+    }
+    .footer-bottom a { color: rgba(255,255,255,.45); text-decoration: none; }
+    .footer-bottom a:hover { color: var(--white); }
 
     /* ── DIVIDER ── */
-    .teal-rule { width: 48px; height: 2px; background: var(--teal); margin-bottom: 1.6rem; }
+    .green-rule { width: 44px; height: 3px; background: var(--green); margin-bottom: 1.2rem; border-radius: 2px; }
+
+    /* ── DEPLOYABLE COOLING ── */
+    .deploy-section { position: relative; overflow: hidden; }
+    .deploy-video-wrap {
+      position: relative; min-height: 90vh;
+      display: flex; align-items: center;
+    }
+    .deploy-video {
+      position: absolute; inset: 0;
+      width: 100%; height: 100%;
+      object-fit: cover; object-position: center;
+    }
+    .deploy-overlay {
+      position: absolute; inset: 0;
+      background: linear-gradient(
+        105deg,
+        rgba(12,30,25,.92) 0%,
+        rgba(12,30,25,.80) 45%,
+        rgba(12,30,25,.35) 100%
+      );
+    }
+    .deploy-content {
+      position: relative; z-index: 2;
+      max-width: var(--max); width: 100%;
+      margin: 0 auto; padding: 5rem 2.5rem;
+    }
+    .deploy-content h2 {
+      font-family: 'Source Serif 4', serif;
+      font-size: clamp(2rem, 4vw, 3.2rem);
+      font-weight: 600; color: var(--white);
+      line-height: 1.12; margin-bottom: 1.2rem; max-width: 520px;
+    }
+    .deploy-content p {
+      font-size: 1rem; color: rgba(255,255,255,.78);
+      max-width: 500px; line-height: 1.75;
+      margin-bottom: 2.5rem; font-weight: 300;
+    }
+    .deploy-rule {
+      width: 44px; height: 3px;
+      background: #7ee8d8; border-radius: 2px;
+      margin-bottom: 1.4rem;
+    }
+    .deploy-specs {
+      display: flex; flex-wrap: wrap; gap: 1.5rem 2.5rem;
+      margin-bottom: 2.5rem;
+    }
+    .deploy-spec { display: flex; flex-direction: column; }
+    .deploy-spec-val {
+      font-family: 'Source Serif 4', serif;
+      font-size: 1.6rem; font-weight: 600;
+      color: #7ee8d8; line-height: 1;
+      margin-bottom: .2rem;
+    }
+    .deploy-spec-label {
+      font-size: .72rem; font-weight: 600;
+      text-transform: uppercase; letter-spacing: .08em;
+      color: rgba(255,255,255,.5);
+    }
+    @media (max-width: 600px) {
+      .deploy-content { padding: 4rem 1.2rem; }
+      .deploy-video-wrap { min-height: 80vh; }
+    }
+
+    /* ── MEDIA SECTION ── */
+    .media-section { padding: 6rem 2rem; background: var(--white); }
+    .media-inner { max-width: var(--max); margin: 0 auto; }
+    .media-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(310px, 1fr));
+      gap: 1.5rem; margin-top: 3rem;
+    }
+    .media-card {
+      display: flex; flex-direction: column;
+      border: 1px solid var(--gray-100);
+      border-radius: var(--radius); padding: 1.6rem;
+      text-decoration: none;
+      transition: box-shadow .18s, border-color .18s, transform .18s;
+      background: var(--white);
+    }
+    .media-card:hover {
+      box-shadow: 0 6px 24px rgba(26,107,92,.11);
+      border-color: var(--green);
+      transform: translateY(-2px);
+    }
+    .media-card-outlet {
+      display: flex; align-items: center; gap: .6rem;
+      margin-bottom: .9rem;
+    }
+    .media-outlet-tag {
+      font-size: .62rem; font-weight: 700; letter-spacing: .1em;
+      text-transform: uppercase; padding: .2rem .55rem;
+      border-radius: 3px; flex-shrink: 0;
+    }
+    .media-outlet-tag.tv      { background: #fff0e0; color: #b05800; }
+    .media-outlet-tag.print   { background: #e8f0fe; color: #1a4db5; }
+    .media-outlet-tag.podcast { background: #f3e8ff; color: #6b21a8; }
+    .media-outlet-tag.science { background: var(--green-lt); color: var(--green-dk); }
+    .media-outlet-name {
+      font-size: .78rem; font-weight: 600; color: var(--gray-400);
+      text-transform: uppercase; letter-spacing: .05em;
+    }
+    .media-card-headline {
+      font-size: 1rem; font-weight: 700; color: var(--ink);
+      line-height: 1.35; margin-bottom: .6rem;
+    }
+    .media-card-desc {
+      font-size: .85rem; color: var(--gray-400);
+      line-height: 1.65; flex: 1; margin-bottom: 1.2rem;
+    }
+    .media-card-meta {
+      display: flex; justify-content: space-between; align-items: center;
+      padding-top: .9rem; border-top: 1px solid var(--gray-100);
+      font-size: .78rem;
+    }
+    .media-date { color: var(--gray-400); }
+    .media-read { color: var(--green); font-weight: 700; text-transform: uppercase; letter-spacing: .05em; }
+
+    /* ── RADIANT EXPLAINER ── */
+    .explainer-section { padding: 6rem 2rem; background: var(--gray-50); border-top: 1px solid var(--gray-100); }
+    .explainer-inner { max-width: var(--max); margin: 0 auto; }
+    .explainer-inner .section-sub strong { color: var(--ink); }
+    .explainer-img-wrap {
+      margin: 2.5rem 0;
+      border-radius: var(--radius);
+      overflow: hidden;
+      box-shadow: 0 4px 24px rgba(0,0,0,.12);
+    }
+    .explainer-img-wrap img { width: 100%; display: block; }
+    .explainer-callouts {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1rem; margin-bottom: 2rem;
+    }
+    @media (max-width: 760px) { .explainer-callouts { grid-template-columns: repeat(2, 1fr); } }
+    @media (max-width: 420px)  { .explainer-callouts { grid-template-columns: 1fr; } }
+    .ex-card {
+      border-radius: var(--radius); padding: 1.4rem 1.2rem;
+      border-top: 4px solid transparent;
+    }
+    .ex-hot    { background: #fff2f0; border-top-color: #d44; }
+    .ex-warm   { background: #fff7ee; border-top-color: #e07b2a; }
+    .ex-neutral{ background: #fffbea; border-top-color: #c9a800; }
+    .ex-cool   { background: #eef6ff; border-top-color: var(--green); }
+    .ex-num {
+      font-family: 'Source Serif 4', serif;
+      font-size: 1.9rem; font-weight: 600; line-height: 1; margin-bottom: .25rem;
+    }
+    .ex-hot .ex-num    { color: #c33; }
+    .ex-warm .ex-num   { color: #c06818; }
+    .ex-neutral .ex-num{ color: #8a7000; }
+    .ex-cool .ex-num   { color: var(--green); }
+    .ex-label {
+      font-size: .78rem; font-weight: 700; text-transform: uppercase;
+      letter-spacing: .07em; color: var(--ink); margin-bottom: .5rem;
+    }
+    .ex-desc { font-size: .82rem; color: var(--gray-400); line-height: 1.6; }
+    .explainer-footnote {
+      font-size: .85rem; color: var(--gray-400); font-style: italic;
+      max-width: 720px; line-height: 1.7;
+      padding-top: 1rem; border-top: 1px solid var(--gray-100);
+    }
 
     @media (max-width: 600px) {
-      .proof-grid { gap: 2rem 2.5rem; }
-      .proof-num { font-size: 2.2rem; }
-      .scene-content, .thermal-content, .apps-content { padding: 6rem 1.2rem 3rem; }
-      .how-section { padding: 5rem 1.2rem; }
-      .science-section, .team-section { padding: 5rem 1.2rem; }
-      .contact-content { padding: 5rem 1.2rem; }
+      .hero-content h1 { font-size: 1.8rem; }
+      .stat-num { font-size: 2.3rem; }
     }
   </style>
 </head>
 <body>
 
-<!-- NAV -->
+<!-- ═══ NAV ═══ -->
 <nav id="main-nav">
   <a class="nav-logo" href="index.html">
     <img src="photos/logo.png" alt="Clearly Cool" />
   </a>
   <ul class="nav-links">
-    <li><a href="#how-it-works">Technology</a></li>
+    <li><a href="#technology">Technology</a></li>
     <li><a href="#applications">Applications</a></li>
-    <li><a href="#science">Science</a></li>
+    <li><a href="#science">Research</a></li>
+    <li><a href="#media">Media</a></li>
     <li><a href="#team">About</a></li>
-    <li><a href="https://www.ashrae.cool" target="_blank" rel="noopener">Comfort Tool ↗</a></li>
+    <li><a class="ext" href="https://www.ashrae.cool" target="_blank" rel="noopener">Comfort Tool</a></li>
   </ul>
-  <a class="nav-cta" href="mailto:hello@clearly-cool.com">Get in Touch</a>
+  <a class="nav-cta" href="mailto:hello@clearly-cool.com">Contact Us</a>
   <button class="nav-hamburger" id="hamburger" aria-label="Open menu" aria-expanded="false">
     <span></span><span></span><span></span>
   </button>
 </nav>
 <div class="nav-drawer" id="nav-drawer">
-  <a href="#how-it-works">Technology</a>
+  <a href="#technology">Technology</a>
   <a href="#applications">Applications</a>
-  <a href="#science">Science</a>
+  <a href="#science">Research</a>
+  <a href="#media">Media</a>
   <a href="#team">About</a>
   <a href="https://www.ashrae.cool" target="_blank" rel="noopener">Comfort Tool ↗</a>
-  <a class="drawer-cta" href="mailto:hello@clearly-cool.com">hello@clearly-cool.com</a>
+  <a class="dcta" href="mailto:hello@clearly-cool.com">hello@clearly-cool.com →</a>
 </div>
 
 <script>
 (function(){
-  var btn=document.getElementById('hamburger');
-  var drawer=document.getElementById('nav-drawer');
-  var nav=document.getElementById('main-nav');
-  if(btn && drawer){
-    btn.addEventListener('click',function(){
-      var open=drawer.classList.toggle('open');
-      btn.classList.toggle('open',open);
-      btn.setAttribute('aria-expanded',open);
+  var btn=document.getElementById('hamburger'),
+      drawer=document.getElementById('nav-drawer');
+  if(!btn||!drawer) return;
+  btn.addEventListener('click',function(){
+    var o=drawer.classList.toggle('open');
+    btn.classList.toggle('open',o);
+    btn.setAttribute('aria-expanded',o);
+  });
+  drawer.querySelectorAll('a').forEach(function(a){
+    a.addEventListener('click',function(){
+      drawer.classList.remove('open');
+      btn.classList.remove('open');
+      btn.setAttribute('aria-expanded','false');
     });
-    drawer.querySelectorAll('a').forEach(function(a){
-      a.addEventListener('click',function(){
-        drawer.classList.remove('open');
-        btn.classList.remove('open');
-        btn.setAttribute('aria-expanded','false');
-      });
-    });
-  }
-  window.addEventListener('scroll', function(){
-    nav.classList.toggle('scrolled', window.scrollY > 40);
   });
 })();
 </script>
 
-<!-- ═══════════════════════════════ HERO ═══════════════════════════════ -->
-<section class="scene hero">
-  <div class="scene-bg"></div>
-  <div class="scene-overlay"></div>
-  <div class="scene-content">
-    <span class="eyebrow">Clearly Cool · Radiant Cooling Technology</span>
+<!-- ═══ HERO SLIDESHOW ═══ -->
+<div class="hero" id="hero">
+  <div class="slide active" style="background-image:url('photos/Clealry-cool%20demonstration%20pavilion%20hero%20shot%20with%20lable.jpg')"></div>
+  <div class="slide" style="background-image:url('photos/flir-demo.png'); background-position: center 40%;"></div>
+  <div class="slide" style="background-image:url('photos/IMG_9853.jpeg'); background-position: center 60%;"></div>
+  <div class="slide" style="background-image:url('photos/IMG_0598.jpeg'); background-position: center 30%;"></div>
+  <div class="hero-content">
     <h1>A proven alternative<br>to <em>air conditioning.</em></h1>
-    <p class="hero-sub">We cool people, not buildings. Chilled radiant panels deliver targeted comfort using 85 watts — a fraction of conventional HVAC — with no ducts, no plumbing, and no wasted energy on empty space.</p>
+    <p class="hero-sub">Clearly Cool radiant panels cool people and animals directly — not entire buildings. 85 watts, no plumbing, proven across outdoor dining, agriculture, transit, and sports.</p>
     <div class="hero-btns">
-      <a class="btn btn-teal" href="#how-it-works">See How It Works</a>
-      <a class="btn btn-ghost" href="mailto:hello@clearly-cool.com">Contact Us</a>
+      <a class="btn btn-white" href="#technology">See How It Works</a>
+      <a class="btn btn-outline" href="mailto:hello@clearly-cool.com">Get in Touch</a>
     </div>
   </div>
-</section>
-
-<!-- ═══════════════════ TAGLINE STRIP ═══════════════════ -->
-<div class="tagline-strip">
-  <p>"Cooling things, not buildings."</p>
-</div>
-
-<!-- ═══════════════════ PROOF STATS ═══════════════════ -->
-<div class="proof-bar">
-  <div class="proof-grid">
-    <div class="proof-stat">
-      <div class="proof-num">85W</div>
-      <div class="proof-label">per panel</div>
-    </div>
-    <div class="proof-stat">
-      <div class="proof-num">6</div>
-      <div class="proof-label">issued &amp; pending patents</div>
-    </div>
-    <div class="proof-stat">
-      <div class="proof-num">10+</div>
-      <div class="proof-label">peer-reviewed publications</div>
-    </div>
-    <div class="proof-stat">
-      <div class="proof-num">0</div>
-      <div class="proof-label">plumbing required</div>
-    </div>
-    <div class="proof-stat">
-      <div class="proof-num">6</div>
-      <div class="proof-label">global field trials</div>
-    </div>
+  <div class="slide-dots" id="slide-dots">
+    <button class="slide-dot active" data-i="0" aria-label="Slide 1"></button>
+    <button class="slide-dot" data-i="1" aria-label="Slide 2"></button>
+    <button class="slide-dot" data-i="2" aria-label="Slide 3"></button>
+    <button class="slide-dot" data-i="3" aria-label="Slide 4"></button>
   </div>
 </div>
 
-<!-- ═══════════════════ THERMAL PROOF SECTION ═══════════════════ -->
-<section class="thermal-scene" id="how-it-works">
-  <div class="scene-bg"></div>
-  <div class="scene-overlay"></div>
-  <div class="thermal-content">
-    <span class="eyebrow">Infrared Proof</span>
-    <div class="teal-rule"></div>
-    <h2>Cool in every<br><em>wavelength.</em></h2>
-    <p class="thermal-body">This FLIR thermal image captures one of our demonstration pavilions in operation. The cool radiant panel surface — invisible to the naked eye — is unmistakable in the infrared: a field of deep blue radiating cold into the occupied zone below. No air movement. No noise. Just physics.</p>
-    <p class="thermal-body">Radiant cooling works because the human body exchanges heat with surrounding surfaces, not just air. A chilled surface overhead absorbs radiant heat from occupants the same way shade does — silently, efficiently, and without blowing cold air on anyone.</p>
-    <a class="btn btn-ghost" href="https://www.ashrae.cool" target="_blank" rel="noopener">Explore Human Comfort Science ↗</a>
-    <p class="thermal-footnote" style="margin-top:1.2rem;">FLIR image taken at our Coolest Spot demonstration pavilion, Princeton University. Courtesy of Jyotirmoy Mandal.</p>
+<script>
+(function(){
+  var slides = document.querySelectorAll('.slide');
+  var dots   = document.querySelectorAll('.slide-dot');
+  var cur = 0;
+  function goTo(n){
+    slides[cur].classList.remove('active');
+    dots[cur].classList.remove('active');
+    cur = (n + slides.length) % slides.length;
+    slides[cur].classList.add('active');
+    dots[cur].classList.add('active');
+  }
+  dots.forEach(function(d){ d.addEventListener('click', function(){ goTo(+this.dataset.i); }); });
+  setInterval(function(){ goTo(cur+1); }, 5000);
+})();
+</script>
+
+<!-- ═══ MISSION BAND ═══ -->
+<div class="mission-band">
+  <p>"Cooling things, not buildings — delivering comfort where it's needed, without wasting energy on empty space."</p>
+</div>
+
+<!-- ═══ QUICK LINKS ═══ -->
+<div class="quicklinks">
+  <div class="quicklinks-grid">
+    <a class="ql-card" href="#technology">
+      <div class="ql-icon">🧊</div>
+      <div>
+        <div class="ql-text-label">The Technology</div>
+        <div class="ql-text-title">How Radiant Cooling Works</div>
+        <div class="ql-text-desc">Physics-based comfort without conditioning the whole building.</div>
+      </div>
+    </a>
+    <a class="ql-card" href="#applications">
+      <div class="ql-icon">🌍</div>
+      <div>
+        <div class="ql-text-label">Applications</div>
+        <div class="ql-text-title">Where We Deploy</div>
+        <div class="ql-text-desc">Dining, agriculture, transit, sports, construction, and more.</div>
+      </div>
+    </a>
+    <a class="ql-card" href="https://www.ashrae.cool" target="_blank" rel="noopener">
+      <div class="ql-icon">📊</div>
+      <div>
+        <div class="ql-text-label">External Tool</div>
+        <div class="ql-text-title">Human Comfort Calculator ↗</div>
+        <div class="ql-text-desc">Explore operative temperature and thermal comfort at ashrae.cool.</div>
+      </div>
+    </a>
+  </div>
+</div>
+
+<!-- ═══ WHAT WE DO ═══ -->
+<section class="what-section" id="technology">
+  <div class="what-inner">
+    <div class="what-grid">
+      <div class="what-img">
+        <img src="photos/FLIR4762.jpg" alt="FLIR thermal image of the Clearly Cool radiant cooling pavilion" />
+        <p class="what-caption">FLIR thermal image taken at our Coolest Spot demonstration pavilion, Hopewell NJ. The panel surface (deep blue, upper left) is radiating cold into the occupied zone below — unmistakable in the infrared. Temp scale: 25.6–47.7°C.</p>
+      </div>
+      <div class="what-text">
+        <div class="section-eyebrow">What We Do</div>
+        <div class="green-rule"></div>
+        <h2 class="section-title">Cooling things,<br>not buildings.</h2>
+        <p class="section-sub">Conventional air conditioning conditions an entire building to make the people inside comfortable. Clearly Cool works differently — our chilled radiant panels are placed directly above occupied zones, absorbing heat from people and animals by radiation. The same physics that makes shade feel cool, operating 24 hours a day.</p>
+        <p class="section-sub">The result: targeted comfort at a fraction of the energy, with no ducts, no plumbing, and no infrastructure investment. A standard 120V outlet. 85 watts per panel. Solar-ready.</p>
+        <a class="btn btn-green" href="#applications">See Where We Deploy</a>
+      </div>
+    </div>
   </div>
 </section>
 
-<!-- ═══════════════════ HOW IT WORKS ═══════════════════ -->
-<section class="how-section">
-  <div class="how-inner">
-    <div class="how-header">
-      <span class="eyebrow" style="color:var(--teal);">The Technology</span>
-      <h2>Radiant cooling, targeted and precise.</h2>
-      <p>Instead of conditioning an entire building, we place a chilled surface where people actually are. The panel draws heat from bodies by radiation — the same mechanism that makes standing under shade feel refreshing, operating continuously.</p>
+<!-- ═══ RADIANT EXPLAINER ═══ -->
+<section class="explainer-section">
+  <div class="explainer-inner">
+    <div class="section-eyebrow">The Key Insight</div>
+    <div class="green-rule"></div>
+    <h2 class="section-title">Same air. Completely different comfort.</h2>
+    <p class="section-sub">Air temperature and humidity alone don't determine how hot you feel. These four scenarios can have <strong>identical air temperature and humidity</strong> — yet produce radically different levels of thermal stress. The difference is entirely due to the radiant temperature of surrounding surfaces. This is the physical principle Clearly Cool exploits.</p>
+    <div class="explainer-img-wrap">
+      <img src="photos/radiant-explainer.png" alt="Four scenarios showing radiant temperature: direct sunlight 75°C, shade with hot wall 45°C, tree shade 35°C, radiantly cooled structure 25°C" />
     </div>
-
-    <div class="how-row">
-      <div class="how-text">
-        <span class="eyebrow">Step 1 — Placement</span>
-        <h3>The panel goes where people are.</h3>
-        <p>Clearly Cool panels mount above or beside occupied zones — a dining terrace, a farrowing crate, a stadium dugout, a transit shelter. Each panel cools its footprint. Deploy two, cool two zones. The energy savings scale with the precision.</p>
+    <div class="explainer-callouts">
+      <div class="ex-card ex-hot">
+        <div class="ex-num">75°C</div>
+        <div class="ex-label">Direct Sunlight</div>
+        <div class="ex-desc">Hot surfaces and direct solar radiation combine to overwhelm the body's ability to shed heat — even in a breeze.</div>
       </div>
-      <div class="how-img-wrap">
-        <img src="photos/Radiant%20pavilion%20from%20governors%20island%20demonstration%20with%20Penn%20and%20Henny%20Larson.jpg"
-             alt="Clearly Cool radiant pavilion demonstration" />
+      <div class="ex-card ex-warm">
+        <div class="ex-num">45°C</div>
+        <div class="ex-label">Shade + Hot Wall</div>
+        <div class="ex-desc">Moving into shade removes solar gain, but nearby hot masonry still radiates heat back at you. The air feels no different.</div>
       </div>
-    </div>
-
-    <div class="how-row flip">
-      <div class="how-text">
-        <span class="eyebrow">Step 2 — Radiation</span>
-        <h3>Heat leaves bodies, not buildings.</h3>
-        <p>At 85 watts, the panel surface chills below skin temperature. Radiant heat from occupants transfers to the panel — exactly as your body radiates warmth to a cool window in winter. No fans. No drafts. No condensation risk when panels are kept above the dew point.</p>
-        <a href="https://www.ashrae.cool" target="_blank" rel="noopener">Learn about operative temperature and comfort →</a>
+      <div class="ex-card ex-neutral">
+        <div class="ex-num">35°C</div>
+        <div class="ex-label">Tree Shade</div>
+        <div class="ex-desc">Tree canopy provides cool, low-emissivity shade. Body heat now radiates outward — this is what makes shade under trees feel genuinely cooler.</div>
       </div>
-      <div class="how-img-wrap">
-        <img src="photos/Eric%20Teitelbaum%20deomstrating%20the%20difference%20between%20infrared%20thermal%20radiaiton%20transparency%20and%20visible%20light%20transparency.jpg"
-             alt="Eric Teitelbaum demonstrating radiant cooling difference" />
-      </div>
-    </div>
-
-    <div class="how-row">
-      <div class="how-text">
-        <span class="eyebrow">Step 3 — Power</span>
-        <h3>Solar-ready. No new infrastructure.</h3>
-        <p>Standard 120V outlet. No plumbing, no refrigerant lines, no licensed contractor required. At 85W per panel, a modest PV array can run an entire installation off-grid — making our technology viable in places conventional HVAC never could reach.</p>
-      </div>
-      <div class="how-img-wrap">
-        <img src="photos/barnSimple.jpg"
-             alt="Clearly Cool demonstration at Double Brook Farm" />
+      <div class="ex-card ex-cool">
+        <div class="ex-num">25°C</div>
+        <div class="ex-label">Radiant Cooling Panel</div>
+        <div class="ex-desc">A chilled overhead surface acts as an artificial cold sky — pulling heat from the body by radiation, achieving comfort levels below what tree shade alone can provide.</div>
       </div>
     </div>
-
+    <p class="explainer-footnote">All four scenarios can share the same dry-bulb air temperature and relative humidity. The only variable is the mean radiant temperature — which conventional air conditioning never directly addresses, but Clearly Cool does.</p>
   </div>
 </section>
 
-<!-- ═══════════════════ APPLICATIONS ═══════════════════ -->
-<section class="apps-scene" id="applications">
-  <div class="scene-bg"></div>
-  <div class="scene-overlay"></div>
-  <div class="apps-content">
-    <span class="eyebrow">Where We Deploy</span>
-    <h2>Anywhere people gather in heat.</h2>
-    <p>Radiant cooling works wherever a chilled surface can be placed overhead — indoors or out. The same core technology scales from a single dining table to an entire barn row.</p>
-    <div class="apps-tiles">
-      <div class="app-tile">
-        <div class="app-tile-icon">🍽️</div>
-        <div class="app-tile-name">Outdoor Dining</div>
-        <div class="app-tile-detail">Extend patio season. Keep guests comfortable without blowing cold air.</div>
+<!-- ═══ STATS ═══ -->
+<section class="stats-section">
+  <div class="stats-inner">
+    <div class="stats-header">
+      <div class="section-eyebrow">By the Numbers</div>
+      <div class="green-rule"></div>
+      <h2 class="section-title">A decade of research behind every panel.</h2>
+    </div>
+    <div class="stats-grid">
+      <div class="stat-card">
+        <div class="stat-num">85W</div>
+        <div class="stat-label">Per Panel</div>
+        <div class="stat-detail">Less than a light bulb. Solar-PV compatible.</div>
       </div>
-      <div class="app-tile">
-        <div class="app-tile-icon">🏟️</div>
-        <div class="app-tile-name">Sports & Athletics</div>
-        <div class="app-tile-detail">Dugouts, sidelines, player recovery zones.</div>
+      <div class="stat-card">
+        <div class="stat-num">6</div>
+        <div class="stat-label">Patents</div>
+        <div class="stat-detail">Issued and pending, protecting core technology.</div>
       </div>
-      <div class="app-tile">
-        <div class="app-tile-icon">🚌</div>
-        <div class="app-tile-name">Transit Shelters</div>
-        <div class="app-tile-detail">Bus stops and platforms — cooling where it's needed most.</div>
+      <div class="stat-card">
+        <div class="stat-num">10+</div>
+        <div class="stat-label">Publications</div>
+        <div class="stat-detail">Peer-reviewed papers in leading journals.</div>
       </div>
-      <div class="app-tile">
-        <div class="app-tile-icon">🏗️</div>
-        <div class="app-tile-name">Construction Sites</div>
-        <div class="app-tile-detail">Worker rest stations with plug-in radiant cooling.</div>
+      <div class="stat-card">
+        <div class="stat-num">6</div>
+        <div class="stat-label">Field Trials</div>
+        <div class="stat-detail">Across multiple continents and climates.</div>
       </div>
-      <div class="app-tile">
-        <div class="app-tile-icon">🐾</div>
-        <div class="app-tile-name">Animal Agriculture</div>
-        <div class="app-tile-detail">Targeted cooling over individual animals. No full-barn HVAC required.</div>
-      </div>
-      <div class="app-tile">
-        <div class="app-tile-icon">🌳</div>
-        <div class="app-tile-name">Public Spaces</div>
-        <div class="app-tile-detail">Parks, plazas, and events — cooling commons for everyone.</div>
+      <div class="stat-card">
+        <div class="stat-num">0</div>
+        <div class="stat-label">Plumbing Required</div>
+        <div class="stat-detail">No contractor, no refrigerant lines, no permitting.</div>
       </div>
     </div>
-    <a class="btn btn-teal" href="applications.html">Explore All Applications →</a>
   </div>
 </section>
 
-<!-- ═══════════════════ SCIENCE & PRESS ═══════════════════ -->
+<!-- ═══ HOW IT WORKS ═══ -->
+<section class="proof-section">
+  <div class="proof-inner" id="how">
+    <div class="proof-text">
+      <div class="section-eyebrow">The Science</div>
+      <div class="green-rule"></div>
+      <h2 class="section-title">Why radiation beats convection for comfort.</h2>
+      <p class="section-sub">The human body exchanges heat with its surroundings in four ways: conduction, convection, evaporation, and radiation. Air conditioning addresses only convection — it cools the air. Radiant cooling addresses the single largest contributor to thermal comfort in many conditions: the temperature of the surfaces you're surrounded by.</p>
+      <p class="section-sub">When a Clearly Cool panel is placed overhead, it acts as a cold sky — absorbing radiant heat from occupants below. No air movement means no drafts, no noise, and no dry-skin discomfort. People feel cooler even when the ambient air temperature is unchanged.</p>
+      <a class="proof-link" href="https://www.ashrae.cool" target="_blank" rel="noopener">
+        Explore operative temperature at ashrae.cool →
+      </a>
+    </div>
+    <div class="proof-img">
+      <img src="photos/Eric%20Teitelbaum%20deomstrating%20the%20difference%20between%20infrared%20thermal%20radiaiton%20transparency%20and%20visible%20light%20transparency.jpg"
+           alt="Eric Teitelbaum demonstrating infrared vs visible light transparency" />
+      <div class="proof-img-label">Clearly Cool co-founder Dr. Eric Teitelbaum demonstrates how infrared radiation passes through materials that appear opaque in visible light — the key physical principle enabling radiant cooling panels.</div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ APPLICATIONS ═══ -->
+<section class="apps-section" id="applications">
+  <div class="apps-inner">
+    <div class="section-eyebrow">Applications</div>
+    <div class="green-rule"></div>
+    <h2 class="section-title">Anywhere people gather in heat.</h2>
+    <p class="section-sub">The same core technology scales from a single dining table to a full barn row or transit corridor. Radiant cooling works wherever a chilled panel can be positioned overhead — indoors or out.</p>
+    <div class="apps-grid">
+      <div class="app-card">
+        <img src="photos/Outdoor%20dining%20Gemini%20conceptualization.png" alt="Outdoor dining with radiant cooling" />
+        <div class="app-card-body">
+          <h3>Outdoor Dining &amp; Hospitality</h3>
+          <p>Extend the patio season and keep guests comfortable without blowing cold air or disrupting ambiance. Targeted cooling, zero noise.</p>
+        </div>
+      </div>
+      <div class="app-card">
+        <img src="photos/Clearl-cool%20sport%20dugout%20conceptualization%20-%20cool%20players%20not%20just%20drinks.png" alt="Sports dugout cooling" />
+        <div class="app-card-body">
+          <h3>Sports &amp; Athletics</h3>
+          <p>Dugouts, sidelines, and player recovery zones. Cool the athletes, not just their drinks.</p>
+        </div>
+      </div>
+      <div class="app-card">
+        <img src="photos/IMG_1172.jpeg" alt="Media preview event at the Clearly Cool radiant cooling pavilion in Trenton" style="object-position: center 20%;" />
+        <div class="app-card-body">
+          <h3>Public Spaces &amp; Community Events</h3>
+          <p>Parks, plazas, transit shelters, and public gatherings — solar-ready panels bring cooling equity to the people who need it most.</p>
+        </div>
+      </div>
+      <div class="app-card">
+        <img src="photos/Patio%20cooling%20Gemini%20conceptualization.png" alt="Patio radiant cooling" />
+        <div class="app-card-body">
+          <h3>Residential &amp; Patio</h3>
+          <p>Bring the feel of natural shade to any outdoor space, on demand. No permanent installation required.</p>
+        </div>
+      </div>
+      <div class="app-card">
+        <img src="photos/IMG_0144.jpeg" alt="Piglets gathered under a Clearly Cool radiant cooling panel" />
+        <div class="app-card-body">
+          <h3>Animal Agriculture</h3>
+          <p>Targeted cooling directly over individual animals — without conditioning an entire barn. Proven in farrowing and gestation pilots.</p>
+        </div>
+      </div>
+      <div class="app-card">
+        <img src="photos/Clearly-cool%20construction%20site.png" alt="Construction site worker cooling" />
+        <div class="app-card-body">
+          <h3>Construction &amp; Industrial</h3>
+          <p>Worker rest stations and shaded cooling zones on job sites, powered from standard outlets or portable solar.</p>
+        </div>
+      </div>
+    </div>
+    <div class="apps-footer">
+      <a class="btn btn-green" href="applications.html">View All Applications</a>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ SCIENCE & PRESS ═══ -->
 <section class="science-section" id="science">
   <div class="science-inner">
-    <div class="science-header">
-      <span class="eyebrow">Science &amp; Recognition</span>
-      <div class="teal-rule"></div>
-      <h2>A decade of peer-reviewed work behind every panel.</h2>
-      <p>Clearly Cool's technology grows directly from published research in thermal comfort, radiant systems, and building physics — much of it co-authored by our founding team.</p>
-    </div>
+    <div class="section-eyebrow">Research &amp; Recognition</div>
+    <div class="green-rule" style="background:rgba(255,255,255,.35);"></div>
+    <h2 class="section-title">Built on peer-reviewed science.</h2>
+    <p class="section-sub">Our technology grows directly from a decade of published research in thermal comfort, radiant systems, and building physics — much of it co-authored by our founding team at Princeton and AIL Research.</p>
     <div class="science-grid">
       <div class="science-card">
-        <div class="science-card-label">Research Tool</div>
+        <div class="science-card-tag">Research Tool</div>
         <h3>ASHRAE Human Comfort Calculator</h3>
-        <p>Our team contributed to the science behind this interactive tool for exploring thermal comfort, operative temperature, and the role of radiant surfaces in perceived warmth.</p>
-        <a href="https://www.ashrae.cool" target="_blank" rel="noopener">Open the Tool →</a>
+        <p>Explore operative temperature, mean radiant temperature, and the role of surfaces in perceived warmth — the science behind every Clearly Cool deployment.</p>
+        <a href="https://www.ashrae.cool" target="_blank" rel="noopener">Open ashrae.cool →</a>
       </div>
       <div class="science-card">
-        <div class="science-card-label">PNAS · 2020</div>
+        <div class="science-card-tag">PNAS · 2020</div>
         <h3>Expanded Psychrometric Models of Human Comfort</h3>
-        <p>Teitelbaum et al. demonstrated how low-energy radiant cooling can extend human comfort envelopes — the scientific backbone of Clearly Cool's approach.</p>
+        <p>Teitelbaum et al. demonstrated how low-energy radiant cooling extends human comfort envelopes — the scientific backbone of Clearly Cool's approach.</p>
         <a href="https://www.pnas.org/doi/abs/10.1073/pnas.2001678117" target="_blank" rel="noopener">Read the Paper →</a>
       </div>
       <div class="science-card">
-        <div class="science-card-label">Washington Post</div>
+        <div class="science-card-tag">Washington Post</div>
         <h3>A Better Way to Beat the Heat</h3>
-        <p>Coverage of how targeted radiant cooling represents a fundamentally different approach to thermal comfort than conventional air conditioning.</p>
+        <p>National coverage of how targeted radiant cooling represents a fundamentally different approach from conventional air conditioning.</p>
         <a href="https://www.washingtonpost.com/climate-solutions/2020/09/10/radiant-cooling-climate-air-conditioning/" target="_blank" rel="noopener">Read the Story →</a>
       </div>
       <div class="science-card">
-        <div class="science-card-label">Scientific American</div>
+        <div class="science-card-tag">Scientific American</div>
         <h3>A Better Way to Cool Ourselves</h3>
-        <p>How personal and targeted radiant cooling could transform the way we think about energy use in a warming climate.</p>
+        <p>How personal and targeted radiant cooling could transform energy use in a warming climate.</p>
         <a href="https://www.scientificamerican.com/article/a-better-way-to-cool-ourselves/" target="_blank" rel="noopener">Read the Story →</a>
       </div>
       <div class="science-card">
-        <div class="science-card-label">Bloomberg</div>
-        <h3>Cooling Spaces for Extreme Heat</h3>
-        <p>Bloomberg feature on how radiant panels are being deployed in parks and public spaces to address the urban heat crisis.</p>
+        <div class="science-card-tag">Bloomberg</div>
+        <h3>Cooling Parks for Extreme Heat</h3>
+        <p>Bloomberg feature on radiant panels being deployed in parks and public spaces to address the urban heat crisis.</p>
         <a href="https://www.bloomberg.com/news/features/2024-06-14/cooling-parks-will-help-cities-during-record-breaking-heat-waves" target="_blank" rel="noopener">Read the Story →</a>
       </div>
       <div class="science-card">
-        <div class="science-card-label">Princeton CHAOS Lab</div>
-        <h3>Radiant Cooling Research at Princeton</h3>
-        <p>Prof. Forrest Meggers' lab at Princeton — where much of the foundational physics behind Clearly Cool's panels was developed and validated.</p>
+        <div class="science-card-tag">Princeton CHAOS Lab</div>
+        <h3>Foundational Research at Princeton</h3>
+        <p>Prof. Forrest Meggers' lab — where the physics behind Clearly Cool's panels was developed and validated over more than a decade.</p>
         <a href="https://chaos.princeton.edu" target="_blank" rel="noopener">Visit the Lab →</a>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ═══════════════════ TEAM ═══════════════════ -->
+<!-- ═══ DEPLOYABLE COOLING ═══ -->
+<section class="deploy-section" id="deployable">
+  <div class="deploy-video-wrap">
+    <video
+      class="deploy-video"
+      autoplay muted loop playsinline
+      poster="photos/Clealry-cool%20demonstration%20pavilion%20hero%20shot%20with%20lable.jpg"
+      aria-label="Timelapse of a Clearly Cool radiant cooling pavilion being assembled">
+      <source src="photos/deploy-timelapse.mp4" type="video/mp4">
+    </video>
+    <div class="deploy-overlay"></div>
+    <div class="deploy-content">
+      <span class="eyebrow" style="color:#7ee8d8;">Deployable Cooling</span>
+      <div class="deploy-rule"></div>
+      <h2>Up in minutes.<br>Cooling immediately.</h2>
+      <p>A Clearly Cool radiant pavilion assembles from flat-packed components and plugs into a standard outlet — or runs entirely off solar. This timelapse shows a full setup from scratch at our Trenton demonstration site.</p>
+      <div class="deploy-specs">
+        <div class="deploy-spec">
+          <span class="deploy-spec-val">~30 min</span>
+          <span class="deploy-spec-label">Assembly time</span>
+        </div>
+        <div class="deploy-spec">
+          <span class="deploy-spec-val">120V</span>
+          <span class="deploy-spec-label">Standard outlet</span>
+        </div>
+        <div class="deploy-spec">
+          <span class="deploy-spec-val">Solar-ready</span>
+          <span class="deploy-spec-label">Off-grid capable</span>
+        </div>
+      </div>
+      <a class="btn btn-white" href="mailto:hello@clearly-cool.com?subject=Deployable Cooling Inquiry">Request a Demo</a>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ MEDIA SECTION ═══ -->
+<section class="media-section" id="media">
+  <div class="media-inner">
+    <div class="section-eyebrow">In the News</div>
+    <div class="green-rule"></div>
+    <h2 class="section-title">Clearly Cool in the media.</h2>
+    <p class="section-sub">From local TV coverage to academic podcasts, our work on radiant cooling is drawing attention across science, policy, and community development.</p>
+    <div class="media-grid">
+
+      <a class="media-card" href="https://6abc.com/post/uptick-patients-respiratory-symptoms-seen-heat-wave-canadian-wildfire-smoke-hit-philadelphia-region/19521058/" target="_blank" rel="noopener">
+        <div class="media-card-outlet">
+          <span class="media-outlet-tag tv">TV</span>
+          <span class="media-outlet-name">6abc Philadelphia · WPVI</span>
+        </div>
+        <h3 class="media-card-headline">New radiant cooling pavilion in Trenton powered by solar energy</h3>
+        <p class="media-card-desc">Action News covers the debut of Clearly Cool's solar-powered radiant pavilion at Isles' Tucker Street Urban Demonstration Garden — and why it works where conventional AC can't.</p>
+        <div class="media-card-meta">
+          <span class="media-date">July 16, 2026</span>
+          <span class="media-read">Watch story →</span>
+        </div>
+      </a>
+
+      <a class="media-card" href="https://www.towntopics.com/2026/07/15/keeping-cool-without-air-conditioning-at-radiant-cooling-pavilion-in-trenton/" target="_blank" rel="noopener">
+        <div class="media-card-outlet">
+          <span class="media-outlet-tag print">Print</span>
+          <span class="media-outlet-name">Town Topics · Princeton, NJ</span>
+        </div>
+        <h3 class="media-card-headline">Keeping Cool Without Air Conditioning At Radiant Cooling Pavilion in Trenton</h3>
+        <p class="media-card-desc">Princeton's weekly newspaper covers the Trenton pavilion launch, the partnership with Isles, and the two-year BPU-funded expansion to bring radiantly cooled benches to parks across the city.</p>
+        <div class="media-card-meta">
+          <span class="media-date">July 15, 2026</span>
+          <span class="media-read">Read story →</span>
+        </div>
+      </a>
+
+      <a class="media-card" href="https://bbfhpod.advancedglazings.com/episodes/dorit-aviv-and-eric-teitelbaum" target="_blank" rel="noopener">
+        <div class="media-card-outlet">
+          <span class="media-outlet-tag podcast">Podcast</span>
+          <span class="media-outlet-name">Better Buildings for Humans · Ep. 133</span>
+        </div>
+        <h3 class="media-card-headline">Cooling the Concrete Jungle: Rethinking Urban Heat and Human Comfort Through Radiant Design</h3>
+        <p class="media-card-desc">Eric Teitelbaum joins Dorit Aviv (UPenn) on the Better Buildings for Humans podcast to discuss urban heat islands, membrane-assisted radiant cooling, and how solar-powered shelters and bus stops can protect vulnerable communities.</p>
+        <div class="media-card-meta">
+          <span class="media-date">April 15, 2026</span>
+          <span class="media-read">Listen →</span>
+        </div>
+      </a>
+
+      <a class="media-card" href="https://www.washingtonpost.com/climate-solutions/2020/09/10/radiant-cooling-climate-air-conditioning/" target="_blank" rel="noopener">
+        <div class="media-card-outlet">
+          <span class="media-outlet-tag print">Print</span>
+          <span class="media-outlet-name">The Washington Post</span>
+        </div>
+        <h3 class="media-card-headline">A Better Way to Beat the Heat</h3>
+        <p class="media-card-desc">National coverage of how targeted radiant cooling represents a fundamentally different approach to thermal comfort — and why it could reshape how we think about cooling in a warming world.</p>
+        <div class="media-card-meta">
+          <span class="media-date">September 2020</span>
+          <span class="media-read">Read story →</span>
+        </div>
+      </a>
+
+      <a class="media-card" href="https://www.scientificamerican.com/article/a-better-way-to-cool-ourselves/" target="_blank" rel="noopener">
+        <div class="media-card-outlet">
+          <span class="media-outlet-tag science">Science</span>
+          <span class="media-outlet-name">Scientific American</span>
+        </div>
+        <h3 class="media-card-headline">A Better Way to Cool Ourselves</h3>
+        <p class="media-card-desc">How personal and targeted radiant cooling could transform energy use in buildings and outdoor spaces — and why the physics makes it so much more efficient than conditioning air.</p>
+        <div class="media-card-meta">
+          <span class="media-read">Read story →</span>
+        </div>
+      </a>
+
+      <a class="media-card" href="https://www.bloomberg.com/news/features/2024-06-14/cooling-parks-will-help-cities-during-record-breaking-heat-waves" target="_blank" rel="noopener">
+        <div class="media-card-outlet">
+          <span class="media-outlet-tag print">Print</span>
+          <span class="media-outlet-name">Bloomberg</span>
+        </div>
+        <h3 class="media-card-headline">Cooling Parks Will Help Cities During Record-Breaking Heat Waves</h3>
+        <p class="media-card-desc">Bloomberg features radiant cooling panels among the emerging technologies being deployed in parks and public spaces to address the urban heat crisis.</p>
+        <div class="media-card-meta">
+          <span class="media-date">June 2024</span>
+          <span class="media-read">Read story →</span>
+        </div>
+      </a>
+
+    </div>
+  </div>
+</section>
+
+<!-- ═══ TEAM ═══ -->
 <section class="team-section" id="team">
   <div class="team-inner">
-    <div class="team-header">
-      <span class="eyebrow">Our Team</span>
-      <h2>70+ years of thermal comfort R&D.</h2>
-      <p>A partnership between <a href="https://ailresearch.com" target="_blank" rel="noopener">AIL Research Inc.</a> and the <a href="https://chaos.princeton.edu" target="_blank" rel="noopener">CHAOS Lab at Princeton University</a> — combining applied engineering with academic research in building physics.</p>
-    </div>
+    <div class="section-eyebrow">Our Team</div>
+    <div class="green-rule"></div>
+    <h2 class="section-title">70+ years of thermal comfort R&amp;D.</h2>
     <div class="team-grid">
       <div class="team-card">
         <img src="photos/Eric%20Teitelbaum%20deomstrating%20the%20difference%20between%20infrared%20thermal%20radiaiton%20transparency%20and%20visible%20light%20transparency.jpg" alt="Dr. Eric Teitelbaum" />
         <h3>Dr. Eric Teitelbaum</h3>
-        <p>Founder &amp; CTO<br><a href="https://ailresearch.com" target="_blank" rel="noopener">AIL Research Inc.</a></p>
+        <p class="role">Founder &amp; CTO<br><a href="https://ailresearch.com" target="_blank" rel="noopener">AIL Research Inc.</a></p>
       </div>
       <div class="team-card">
         <img src="photos/Andrew%20Lowenstein%20thermal%20image%20in%20the%20Coolest%20Spot%20pavilion.jpg" alt="Dr. Andy Lowenstein" />
         <h3>Dr. Andy Lowenstein</h3>
-        <p>Founder &amp; CEO<br><a href="https://ailresearch.com" target="_blank" rel="noopener">AIL Research Inc.</a></p>
+        <p class="role">Founder &amp; CEO<br><a href="https://ailresearch.com" target="_blank" rel="noopener">AIL Research Inc.</a></p>
       </div>
       <div class="team-card">
         <img src="https://static.wixstatic.com/media/3f6285_7a39ca094f354a46b0d51421ce7b3df5~mv2.jpg/v1/fill/w_300,h_360,al_c,q_80/3f6285_7a39ca094f354a46b0d51421ce7b3df5~mv2.jpg" alt="Prof. Forrest Meggers" />
         <h3>Prof. Forrest Meggers</h3>
-        <p>Founder &amp; Chief Scientist<br><a href="https://chaos.princeton.edu" target="_blank" rel="noopener">Princeton CHAOS Lab</a></p>
+        <p class="role">Founder &amp; Chief Scientist<br><a href="https://chaos.princeton.edu" target="_blank" rel="noopener">Princeton CHAOS Lab</a></p>
       </div>
     </div>
+    <p class="team-blurb">Clearly Cool is a partnership between <a href="https://ailresearch.com" target="_blank" rel="noopener">AIL Research Inc.</a> and the <a href="https://chaos.princeton.edu" target="_blank" rel="noopener">CHAOS Lab at Princeton University</a> — combining decades of applied engineering with cutting-edge academic research in building physics and thermal comfort science. Joint patents and new system developments are actively under development through this collaboration.</p>
   </div>
 </section>
 
-<!-- ═══════════════════ CONTACT ═══════════════════ -->
-<section class="contact-section" style="position:relative; min-height:50vh; display:flex; align-items:center;">
-  <div class="scene-bg" style="background-image: url('photos/Patio\ cooling\ Gemini\ conceptualization.png'); background-size:cover; background-position:center; position:absolute; inset:0;"></div>
-  <div class="scene-overlay" style="position:absolute; inset:0; background:rgba(13,26,27,.85);"></div>
-  <div class="contact-content" style="position:relative; z-index:2; text-align:center; padding:7rem 2rem; width:100%;">
-    <span class="eyebrow">Work With Us</span>
-    <h2 style="font-family:'Playfair Display',serif; font-size:clamp(1.8rem,3.5vw,2.8rem); color:var(--white); font-weight:700; margin-bottom:1rem;">Ready to cool things differently?</h2>
-    <p style="color:var(--muted); max-width:460px; margin:0 auto 2.5rem; font-size:1rem; font-weight:300;">Whether you're a producer, developer, municipality, or investor — we want to hear from you.</p>
-    <a class="btn btn-teal" href="mailto:hello@clearly-cool.com">hello@clearly-cool.com</a>
-  </div>
+<!-- ═══ CONTACT CTA ═══ -->
+<section class="cta-section">
+  <div class="section-eyebrow">Work With Us</div>
+  <div class="green-rule" style="margin:0.6rem auto 1.2rem;"></div>
+  <h2 class="section-title">Ready to cool things differently?</h2>
+  <p class="section-sub" style="margin:0 auto 2.2rem;">Whether you're a producer, developer, municipality, venue operator, or investor — we want to hear from you.</p>
+  <a class="btn btn-green" href="mailto:hello@clearly-cool.com">hello@clearly-cool.com</a>
 </section>
 
-<!-- FOOTER -->
+<!-- ═══ FOOTER ═══ -->
 <footer>
-  <p>© 2026 Clearly Cool &nbsp;|&nbsp;
-     <a href="mailto:hello@clearly-cool.com">hello@clearly-cool.com</a> &nbsp;|&nbsp;
-     <a href="applications.html">Applications</a> &nbsp;|&nbsp;
-     <a href="https://www.ashrae.cool" target="_blank" rel="noopener">Comfort Tool</a> &nbsp;|&nbsp;
-     <a href="https://ailresearch.com" target="_blank" rel="noopener">AIL Research</a>
-  </p>
+  <div class="footer-inner">
+    <div class="footer-brand">
+      <img src="photos/logo.png" alt="Clearly Cool" />
+      <p>Clearly Cool develops radiant cooling panel technology for people and animals — a proven, low-energy alternative to air conditioning with no plumbing required.</p>
+      <br>
+      <a href="mailto:hello@clearly-cool.com">hello@clearly-cool.com</a>
+    </div>
+    <div class="footer-col">
+      <h4>Navigate</h4>
+      <ul>
+        <li><a href="#technology">Technology</a></li>
+        <li><a href="#applications">Applications</a></li>
+        <li><a href="applications.html">All Applications</a></li>
+        <li><a href="#science">Research</a></li>
+        <li><a href="#team">About</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Resources</h4>
+      <ul>
+        <li><a href="https://www.ashrae.cool" target="_blank" rel="noopener">Comfort Tool ↗</a></li>
+        <li><a href="https://ailresearch.com" target="_blank" rel="noopener">AIL Research ↗</a></li>
+        <li><a href="https://chaos.princeton.edu" target="_blank" rel="noopener">Princeton CHAOS Lab ↗</a></li>
+        <li><a href="https://www.pnas.org/doi/abs/10.1073/pnas.2001678117" target="_blank" rel="noopener">PNAS 2020 Paper ↗</a></li>
+        <li><a href="mailto:hello@clearly-cool.com">Contact Us</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>© 2026 Clearly Cool, Inc. · Hopewell, NJ</span>
+    <span><a href="mailto:hello@clearly-cool.com">hello@clearly-cool.com</a></span>
+  </div>
 </footer>
 
 </body>
