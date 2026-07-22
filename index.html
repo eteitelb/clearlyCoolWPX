@@ -464,6 +464,12 @@
       .deploy-video-wrap { min-height: 80vh; }
     }
 
+    .media-card { overflow: hidden; }
+    .media-card.has-img { padding: 0; }
+    .media-card.has-img .media-card-img {
+      width: 100%; height: 200px; object-fit: cover; display: block;
+    }
+    .media-card.has-img .media-card-body { padding: 1.6rem; }
     /* ── MEDIA SECTION ── */
     .media-section { padding: 6rem 2rem; background: var(--white); }
     .media-inner { max-width: var(--max); margin: 0 auto; }
@@ -970,6 +976,8 @@
           <span class="media-read">Read post →</span>
         </div>
       </a>
+
+      <a class="media-card" href="https://6abc.com/post/uptick-patients-respiratory-symptoms-seen-heat-wave-canadian-wildfire-smoke-hit-philadelphia-region/19521058/" target="_blank" rel="noopener">
         <div class="media-card-outlet">
           <span class="media-outlet-tag tv">TV</span>
           <span class="media-outlet-name">6abc Philadelphia · WPVI</span>
@@ -982,7 +990,9 @@
         </div>
       </a>
 
-      <a class="media-card" href="https://www.towntopics.com/2026/07/15/keeping-cool-without-air-conditioning-at-radiant-cooling-pavilion-in-trenton/" target="_blank" rel="noopener">
+      <a class="media-card has-img" href="https://www.towntopics.com/2026/07/15/keeping-cool-without-air-conditioning-at-radiant-cooling-pavilion-in-trenton/" target="_blank" rel="noopener">
+        <img class="media-card-img" src="photos/IMG_1172.jpeg" alt="Media preview event at the Clearly Cool radiant cooling pavilion in Trenton" loading="lazy" style="object-position: center 25%;" />
+        <div class="media-card-body">
         <div class="media-card-outlet">
           <span class="media-outlet-tag print">Print</span>
           <span class="media-outlet-name">Town Topics · Princeton, NJ</span>
@@ -992,6 +1002,7 @@
         <div class="media-card-meta">
           <span class="media-date">July 15, 2026</span>
           <span class="media-read">Read story →</span>
+        </div>
         </div>
       </a>
 
